@@ -7,9 +7,11 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "start": "node server/index.js"
+    "start": "node server/index.js",
+    "make": "concurrently \"npm run start\" \"npm run dev\""
   },
   "dependencies": {
+    "concurrently": "^7.6.0",
     "cors": "^2.8.5",
     "express": "^4.18.2",
     "mongoose": "^7.0.2",
