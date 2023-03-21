@@ -4,8 +4,8 @@ let cors= require('cors');
 
 app.use(cors());
 
-let User= require('../src/dbfiles/User.js');
-let Post= require('../src/dbfiles/Post.js');
+let User= require('./dbfiles/User.js');
+let Post= require('./dbfiles/Post.js');
 
 app.get("/api", (req, res) => {
 	// get all documents
