@@ -1,6 +1,8 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
+import './HomePost.css';
 import HomePostList from './HomePostList';
+import { NavLink, Routes, Route } from 'react-router-dom';
 
 export default function Home() {
 	const [posts, setPosts] = useState([]);
@@ -14,8 +16,9 @@ export default function Home() {
 	}, []);
 
 	return (
-		<div className="Home">
-			<HomePostList posts={posts} />
-		</div>
+
+		<Routes>
+			<Route exact path='/' element={	<HomePostList posts={posts} /> }></Route>
+		</Routes>
 	)
 }
