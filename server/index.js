@@ -43,11 +43,9 @@ app.use("/all", (req, res) => {
 		(post) => {
 			if (post) {
 				if (Array.isArray(post)) {
-					// res.json(post);
-					// res.write('<ul>');
 					post.forEach( (p) => {
 						// res.write('<li>');
-						res.write('Name: ' + p.seller + '\n'); 
+						res.write('Name: ' + p.seller + '\n');  // double check 
 						res.write('Title: ' + p.title + '\n');
 						res.write('Date: ' + p.date + '\n'); 
 						res.write('Description: ' + p.description + '\n');
@@ -56,7 +54,6 @@ app.use("/all", (req, res) => {
 						res.write('Status: ' + p.status + '\n\n\n');
 						res.write('</li>');
 					});
-					// res.write('<ul>');
 				} else { // only one post exists
 					var p = post[0];
 					res.write('Name: ' + p.seller + '\n'); 
@@ -75,6 +72,64 @@ app.use("/all", (req, res) => {
 			res.status(500).send('Something went wrong');
 	});
 });
+
+// endpoint for editing currently active posts such as updating the description and price 
+app.use("/edit", (req, res) => {
+	var postId = req.query.id;
+	var userId = req.query.userId;
+	var newTitle = req.query.title;
+	var newDate = req.query.date;
+	var newDesc = req.query.description; // double check
+	var newPrice = Number(req.query.price);
+	var newPhotos = req.query.photos;
+	var newStatus = req.query.status;
+
+	if (!req.query.id) {
+		// if the id is missing
+        res.json( { 'status' : 'missing data' });
+	}
+
+	var filter = { 'id' : postId};
+
+	var action = { '$set' : { 'title' :  newTitle, 'date': newDate, 'description': newDesc, 
+	'price': newPrice, 'photos': newPhotos, 'status': newStatus} };
+
+	Post.findOneAndUpdate( filter, action, (err, p) => {
+		if (err) {
+			// if an error occurs in acessing the database
+			res.status(500).send("Something went wrong"); 
+		}
+		else if (!p) {
+			var newp = new Post ({
+				_id: req.query.id,
+				seller: userId,
+				title: newTitle,
+				date: newDate,
+				description: newDesc,
+				price: newPrice,
+				photos: newPhotos,
+				status: newStatus,
+			});
+
+				newp.save( (err) => {
+				if (err) {
+					res.status(500).send("Something went wrong"); 
+					}
+					else {
+						res.json( { 'status' : 'created' } );
+				}
+					});
+		 }
+		 else {
+				 res.json( { 'status' : 'updated' } );
+		 }
+});
+ 
+});
+
+
+
+
 
 app.listen(3000, () => {
 	console.log('Listening on port 3000');
