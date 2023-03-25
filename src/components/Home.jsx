@@ -1,8 +1,10 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-import './HomePost.css';
+import { Routes, Route } from 'react-router-dom';
+
+import Header from './Header';
+import './Home.css';
 import HomePostList from './HomePostList';
-import { NavLink, Routes, Route } from 'react-router-dom';
 
 export default function Home() {
 	const [posts, setPosts] = useState([]);
@@ -16,9 +18,12 @@ export default function Home() {
 	}, []);
 
 	return (
-
-		<Routes>
-			<Route exact path='/' element={	<HomePostList posts={posts} /> }></Route>
-		</Routes>
+		<div className="HomePage">
+			<Header />
+			<Routes>
+				<Route exact path='/' element={	<HomePostList posts={posts} /> }></Route>
+				<Route exact path='/profile' element={ <h1>hi</h1> }></Route>
+			</Routes>
+		</div>
 	)
 }
