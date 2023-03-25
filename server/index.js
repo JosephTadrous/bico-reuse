@@ -76,7 +76,7 @@ app.use("/all", (req, res) => {
 // endpoint for editing currently active posts such as updating the description and price 
 app.use("/edit", (req, res) => {
 	var postId = req.query.id;
-	var userId = req.query.userId;
+	var userName = req.query.name;
 	var newTitle = req.query.title;
 	var newDate = req.query.date;
 	var newDesc = req.query.description; // double check
@@ -84,12 +84,12 @@ app.use("/edit", (req, res) => {
 	var newPhotos = req.query.photos;
 	var newStatus = req.query.status;
 
-	if (!req.query.id) {
+	if (!req.query.id || !req.query.userName) {
 		// if the id is missing
         res.json( { 'status' : 'missing data' });
 	}
 
-	var filter = { 'id' : postId};
+	var filter = {'_id' : postId, 'seller': userName};
 
 	var action = { '$set' : { 'title' :  newTitle, 'date': newDate, 'description': newDesc, 
 	'price': newPrice, 'photos': newPhotos, 'status': newStatus} };
