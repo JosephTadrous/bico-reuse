@@ -1,15 +1,17 @@
 :root {
 
-	/* CSS HEX */
-	--baby-powder: #FFFEFAff;
-	--platinum: #E1E0DCff;
-	--silver: #C3C1BDff;
-	--silver-2: #A5A39Fff;
-	--battleship-gray: #878580ff;
-	--dim-gray: #696762ff;
-	--black-olive: #4B4843ff;
-	--jet: #2D2A25ff;
-	--jet-transparent: #2D2A25bb;
+	/* CSS HEX
+	Reference: https://muffingroup.com/blog/green-color-palette/
+	*/
+	--black-default: #010101;
+	--quarter-spanish-white: #faf6ed;
+	--fern: #5cb25d;
+	--light-gray: #bebab3;
+	--confetti: #e6ca51;
+	--fuscous-gray: #484847;
+	--spring-green: #02ec88;
+	--cinnabar: #e53529;
+	--la-palma: #0f9015;
 
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -17,7 +19,7 @@
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: var(--baby-powder);
+  background-color: var(--quarter-spanish-white);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;

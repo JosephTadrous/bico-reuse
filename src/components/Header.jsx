@@ -9,12 +9,19 @@ export default function Header() {
 	return (
 		<div className="Header">
 			<NavLink className="logo" to={'/'}>
-				HOME
+				BiCo-Reuse
 			</NavLink>
+
+			<div className="RightLinks">
+				<NavLink className="CreateButton" to={'/create'}>
+					<h3>+ New Post</h3>
+				</NavLink>
+				
+				<NavLink to={'/profile'}>
+					<img className="pfp" src={PFP} alt="PFP" />
+				</NavLink>
+			</div>
 			
-			<NavLink to={'/profile'}>
-				<img className="pfp" src={PFP} alt="PFP" />
-			</NavLink>
 		</div>
 	)
 }

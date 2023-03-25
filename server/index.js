@@ -9,7 +9,7 @@ let Post= require('./dbfiles/Post.js');
 
 app.get("/api", (req, res) => {
 	// get all documents
-	let posts= Post.find()
+	Post.find()
 	.populate('seller')
 	.then(
 		// success
@@ -27,6 +27,21 @@ app.get("/api", (req, res) => {
 		(error) => {
 			res.status(500).send('Something went wrong');
 	});
+});
+
+app.get("/post", (req, res) => {
+	let pid= req.query.pid;
+	console.log(pid);
+	Post.findById(pid)
+	.populate('seller')
+	.then(
+		// success
+		(post) => {
+			res.json(post);
+		}, // failure
+		(error) => {
+			res.status(500).send('Something went wrong');
+		});
 });
 
 app.listen(3000, () => {

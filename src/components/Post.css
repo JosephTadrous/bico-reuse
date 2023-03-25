@@ -1,0 +1,55 @@
+.Post {
+	color: var(--fuscous-gray);
+}
+
+.PostPage {
+	padding: 16px;
+}
+
+
+.PostHeader {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	border-style: solid;
+	padding: 0px 0px 8px 0px;
+	border-width: 0px 0px 1px 0px;
+	border-color: var(--fuscous-gray);
+}
+
+.PostHeader h1 {
+	margin: 0px;
+}
+
+.SellerInfo {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+	gap: 16px;
+}
+
+.SellerInfo h5 {
+	margin: 0px;
+}
+
+.PostTitleAndDate {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	gap: 20px;
+	margin: 0px 0px 0px 16px;
+}
+
+.PostTitleAndDate h5 {
+	font-style: italic;
+	color: var(--light-gray);
+	margin: 0px;
+	display: flex;
+}
+
+.Description {
+	margin: 0px;
+	padding: 16px;
+}
+
