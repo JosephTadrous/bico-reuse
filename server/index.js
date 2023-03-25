@@ -7,6 +7,7 @@ app.use(cors());
 let User= require('./dbfiles/User.js');
 let Post= require('./dbfiles/Post.js');
 
+
 app.use("/profile", (req, res) => {
 
 	// shows another user's profile
@@ -77,6 +78,46 @@ app.get("/api", (req, res) => {
 		(error) => {
 			res.status(500).send('Something went wrong');
 	});
+});
+
+app.use("/update", (req, res) => {
+	var filter = { '_id' : req.query.id };
+	var action = { '$set': {'name' : req.query.name, 'email' : req.query.email, 'phone' : req.query.phone} };
+	let updatedUser = User.findOneAndUpdate(filter, action)
+	.then(
+		(orig) => {
+			if (!orig) {
+				res.json({'status' : 'no user found'});
+			} else {
+				res.json({'status' : 'success'});
+			}
+		},
+		(error) => {
+			res.status(500).send('Something went wrong');
+		}
+	);
+});
+
+app.use("/", (req, res) => {
+	let users= User.find()
+	.populate('history')
+	.then(
+		// success
+		(users) => {
+			if (users) {
+				if (Array.isArray(users)) {
+					res.json(users);
+				} else { // only one post exists
+					res.json([users]);
+				}
+			} else { // undefined
+				res.json([]);
+			}
+		}, // failure
+		(error) => {
+			res.status(500).send('Something went wrong');
+	});
+
 });
 
 
