@@ -10,13 +10,29 @@ ul {
 	display: flex;
 	padding: 12px;
 	flex-direction: column;
+	gap: 16px;
 }
 
 .HomePost {
 	flex: 1;
-	width: 100%;
+	display: flex;
+	justify-content: flex-start;
+	background-color: #E7E9EB;
+	margin: 0;
+	padding: 4px;
+	border-radius: 16px;
+}
+
+.HomePost .Container {
+	display: flex;
+	align-items: center;
+}
+
+.HomePost:hover {
+	background-color: #C7C9CB;
 }
 
 .HomePage {
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.20);
 }
+
