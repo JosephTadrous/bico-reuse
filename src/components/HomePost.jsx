@@ -9,6 +9,7 @@ export default function HomePost({post}) {
 			 		to={'/post'} 
 					state={{pid: post._id}}>
 				<h1>{post.title} - ${post.price}</h1>
+				<h3>{post.seller.name}</h3>
 			</NavLink> 
 		</div>
 	)

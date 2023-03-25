@@ -21,7 +21,10 @@ export default function PostPage() {
 
 	return (
 		<div className="PostPage">
-			<Post post={post}/>	
+				
+			<Routes>
+				<Route exact path='/post' element={	<Post post={post}/> }></Route>
+			</Routes>
 		</div>
 	)
 }

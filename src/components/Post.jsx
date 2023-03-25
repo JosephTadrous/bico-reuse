@@ -10,15 +10,17 @@ export default function Post({post}) {
 		} else { // generate the post component
 			return <div className="Post">
 					<div className="PostHeader">
-						<div className="PostTitleAndDate">
-							<h1>{post.title} - ${post.price}</h1>
-							<h5>{(new Date(post.date)).toLocaleString()}</h5>
-						</div>
+						<h1>{post.title} - ${post.price}</h1>
+						<h5>{(new Date(post.date)).toLocaleString()}</h5>
 
 						<div className="SellerInfo">
 							<h5>Seller: {post.seller.name}</h5>
 							<h5>Email:  {post.seller.email}</h5>
 							<h5>Phone:  {post.seller.phone}</h5>
+						</div>
+
+						<div className="EditButton">
+							
 						</div>
 					</div>
 					<div className="pictures">
