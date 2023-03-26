@@ -1,6 +1,11 @@
 let express= require('express');
 let app= express();
 let cors= require('cors');
+var mongoose = require('mongoose');
+
+var bodyParser = require('body-parser');
+app.use(bodyParser.urlencoded({ extended: true }));
+
 
 app.use(cors());
 
@@ -31,7 +36,7 @@ app.get("/api", (req, res) => {
 
 app.use("/create_post", (req, res) => {
 	// create a new post for sales 
-	user_id = req.body.user_id
+	user_id = req.body.user_id;
 	title = req.body.title; 
 	description = req.body.description; 
 	price = Number(req.body.price); 
