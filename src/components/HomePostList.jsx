@@ -1,10 +1,14 @@
 import React from 'react';
 import HomePost from './HomePost';
+import './Home.css'; 
 
 export default function HomePostList({posts}) {
-	return (
+	return ( <ul className="PostLinks">{
 		posts.map((post) => {
-			return <HomePost key={post._id} post={post} />
+			return <li key={post._id}> 
+				<HomePost post={post}/>
+			</li>
 		})
+		}</ul>
 	)
 }
