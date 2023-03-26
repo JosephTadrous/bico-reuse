@@ -3,6 +3,8 @@ import {useState, useEffect} from 'react';
 import Post from './Post';
 import { Route, Routes, useLocation } from 'react-router-dom';
 import './Post.css';
+import { NavLink } from 'react-router-dom';
+import PostUpdateForm from './PostUpdateForm';
 
 
 export default function PostPage() {
@@ -23,6 +25,16 @@ export default function PostPage() {
 	return (
 		<div className="PostPage">
 			<Post post={post} />
+
+			<Routes>
+				<Route exact path='/editPost' element={ <PostUpdateForm post={post}/>}></Route>
+			</Routes>
+
+			<div className="EditButton">
+				<NavLink className="CreateEditButton" to={'/editPost'}>
+					<h3>Edit</h3>
+				</NavLink>	
+			</div>
 	
 		</div>
 	)

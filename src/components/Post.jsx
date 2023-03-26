@@ -1,4 +1,7 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
+import PostUpdateForm from './PostUpdateForm';
+import { Routes, Route } from 'react-router-dom';
 
 
 export default function Post({post}) {
@@ -18,11 +21,16 @@ export default function Post({post}) {
 							<h5>Email:  {post.seller.email}</h5>
 							<h5>Phone:  {post.seller.phone}</h5>
 						</div>
+{/* 
+						<button className="EditButton" onClick={() => navigate('/editPost')}>
+          					Edit
+       					</button> */}
 
-						<div className="EditButton">
-							
-						</div>
 					</div>
+					{/* <div className="UpdateFormPage">
+						
+					</div> */}
+					
 					<div className="pictures">
 						{
 							post.photos.map((picture) => {
