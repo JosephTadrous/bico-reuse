@@ -1,6 +1,11 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
+import { Routes, Route } from 'react-router-dom';
+
+import Header from './Header';
+import './Home.css';
 import HomePostList from './HomePostList';
+import PostPage from './PostPage';
 
 export default function Home() {
 	const [posts, setPosts] = useState([]);
@@ -11,11 +16,17 @@ export default function Home() {
 		.then((posts) => {
 			setPosts(posts);
 		});
-	}, []);
+	});
 
 	return (
-		<div className="Home">
-			<HomePostList posts={posts} />
+		<div className="HomePage">
+			<Header />
+			<Routes>
+				<Route exact path='/' element={	<HomePostList posts={posts} /> }></Route>
+				<Route exact path='/profile' element={ <h1>Placeholder</h1> }></Route>
+				<Route exact path='/post' element={ <PostPage /> }></Route>
+				<Route exact path='/create' element={ <p>PlaceHolder</p> }></Route>
+			</Routes>
 		</div>
 	)
 }

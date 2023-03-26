@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="75mm"
+   height="75mm"
+   viewBox="0 0 75 75"
+   version="1.1"
+   id="svg5"
+   inkscape:version="1.2 (dc2aedaf03, 2022-05-15)"
+   sodipodi:docname="profile.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     showgrid="false"
+     inkscape:zoom="1.5625561"
+     inkscape:cx="111.03601"
+     inkscape:cy="126.07547"
+     inkscape:window-width="1920"
+     inkscape:window-height="1057"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs2">
+    <inkscape:path-effect
+       effect="fillet_chamfer"
+       id="path-effect672"
+       is_visible="true"
+       lpeversion="1"
+       nodesatellites_param="F,0,0,1,0,3.96875,0,1 @ F,0,0,1,0,3.96875,0,1 @ F,0,0,1,0,3.96875,0,1 @ F,0,0,1,0,3.96875,0,1 @ F,0,0,1,0,3.96875,0,1 @ F,0,0,1,0,3.96875,0,1"
+       unit="px"
+       method="auto"
+       mode="F"
+       radius="15"
+       chamfer_steps="1"
+       flexible="false"
+       use_knot_distance="true"
+       apply_no_radius="true"
+       apply_with_radius="true"
+       only_selected="false"
+       hide_knots="false" />
+    <inkscape:path-effect
+       effect="fillet_chamfer"
+       id="path-effect549"
+       is_visible="false"
+       lpeversion="1"
+       nodesatellites_param="F,0,0,1,0,0,0,1 @ F,0,0,1,0,0,0,1 @ F,0,0,1,0,0,0,1 @ F,0,0,1,0,0,0,1 @ F,0,0,1,0,0,0,1 @ F,0,0,1,0,0,0,1"
+       unit="px"
+       method="auto"
+       mode="F"
+       radius="0"
+       chamfer_steps="1"
+       flexible="false"
+       use_knot_distance="true"
+       apply_no_radius="true"
+       apply_with_radius="true"
+       only_selected="true"
+       hide_knots="false" />
+  </defs>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <circle
+       style="fill:#ffffff;stroke-width:0.252025;fill-opacity:1"
+       id="path277"
+       cx="37.5"
+       cy="15"
+       r="10" />
+    <path
+       sodipodi:type="star"
+       style="fill:#ffffff;stroke-width:0.264583;fill-opacity:1"
+       id="path668"
+       inkscape:flatsided="false"
+       sodipodi:sides="3"
+       sodipodi:cx="31.325542"
+       sodipodi:cy="38.606613"
+       sodipodi:r1="23.249685"
+       sodipodi:r2="11.62484"
+       sodipodi:arg1="0.52359878"
+       sodipodi:arg2="1.5707963"
+       inkscape:rounded="-0.0026767082"
+       inkscape:randomized="0"
+       d="m 47.492149,50.211056 c -3.530611,-0.0021 -8.667366,0.0057 -12.198093,0.01224 -2.19175,0.0041 -5.745287,0.0041 -7.937049,0 -3.530733,-0.0065 -8.667488,-0.01433 -12.198092,-0.01224 -2.1916,0.0013 -3.063345,-1.508629 -1.966418,-3.405972 1.767112,-3.056556 4.328751,-7.509007 6.088445,-10.569979 1.092356,-1.900143 2.869125,-4.977596 3.968525,-6.873687 1.771036,-3.054432 4.346152,-7.499101 6.109647,-10.557737 1.094679,-1.898628 2.838183,-1.89862 3.932868,1.9e-5 1.763498,3.058641 4.338614,7.503311 6.109647,10.557737 1.099394,1.89608 2.876162,4.973533 3.968525,6.873687 1.759697,3.060978 4.321336,7.513429 6.088445,10.569979 1.096921,1.897333 0.225161,3.407248 -1.96645,3.405953 z"
+       inkscape:transform-center-y="-6.5473887"
+       transform="matrix(0.99427398,0,0,1.1264474,6.3538263,8.9226649)"
+       inkscape:path-effect="#path-effect672" />
+    <circle
+       style="fill:none;fill-rule:evenodd;stroke:#ffffff;stroke-width:2;stroke-dasharray:none;stroke-opacity:1"
+       id="path12425"
+       cx="-37.5"
+       cy="37.5"
+       transform="scale(-1,1)"
+       r="36.63242" />
+  </g>
+</svg>
