@@ -207,6 +207,10 @@ app.get("/post", (req, res) => {
 	let pid= req.query.pid;
 	console.log(pid);
 	Post.findById(pid)
+	.populate('seller')
+	.then(
+		// success
+		(post) => {
 			res.json(post);
 		}, // failure
 		(error) => {
