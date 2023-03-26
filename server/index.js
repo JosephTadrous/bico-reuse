@@ -41,31 +41,6 @@ app.use("/profile", (req, res) => {
 	}
 });
 
-	// User.findOne(filter)
-	// .then((user)=>{
-	// 	console.log("Result :",user);
-	// 	res.json({'user' : user});
-	// })
-	// .catch((err)=>{
-	// 	console.log(err);
-	// });
-	// if (!req.query.id) {
-	// 	console.log("wtf")
-	// }
-	// else {
-	// 	let user = 	User.findOne(filter).then( (user, err) => {
-	// 		if (err) {
-	// 			res.json({'status' : err});
-	// 		}
-	// 		else if (!user) {
-	// 			res.json({'status' : 'no user found'});
-	// 		}
-	// 		else {
-	// 			res.json({'user' : user});
-	// 		}
-	// 	});
-	// }
-
 
 app.get("/api", (req, res) => {
 	// get all documents
@@ -92,7 +67,7 @@ app.get("/api", (req, res) => {
 
 app.use("/update", (req, res) => {
 	var filter = { '_id' : req.query.id };
-	var action = { '$set': {'name' : req.query.name, 'email' : req.query.email, 'phone' : req.query.phone} };
+	var action = { '$set': {'name' : req.body.name, 'email' : req.body.email, 'phone' : req.body.phone} };
 	let updatedUser = User.findOneAndUpdate(filter, action)
 	.then(
 		(orig) => {
