@@ -10,7 +10,12 @@ export default function HomePost({post}) {
 					state={{pid: post._id}}>
 				<h1>{post.title} - ${post.price}</h1>
 			</NavLink> 
-			<h3>{post.seller.name}</h3>
+			
+			<NavLink 
+				to={'\profile'}
+				state={{sellerID: post.seller._id}}>
+				<h3>{post.seller.name}</h3>
+			</NavLink>
 		</div>
 	)
 }

@@ -6,7 +6,7 @@ export default function Post({post}) {
 	function CreatePost() {
 		// this means post is null or undefined
 		if (!post) {
-			return <h1>{"This post doesn't exist :("}</h1>
+			return <></>
 		} else { // generate the post component
 			return <div className="Post">
 					<div className="PostHeader">
