@@ -25,6 +25,7 @@ export default function Home() {
 				<Route exact path='/' element={	<HomePostList posts={posts} /> }></Route>
 				<Route exact path='/profile' element={ <h1>Placeholder</h1> }></Route>
 				<Route exact path='/post' element={ <PostPage /> }></Route>
+				<Route exact path='/create' element={ <p>PlaceHolder</p> }></Route>
 			</Routes>
 		</div>
 	)

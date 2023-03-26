@@ -1,8 +1,9 @@
 import React from 'react';
 import {useState, useEffect} from 'react';
 import Post from './Post';
-import { useLocation } from 'react-router-dom';
+import { Route, Routes, useLocation } from 'react-router-dom';
 import './Post.css';
+
 
 export default function PostPage() {
 	let [post, setPost]= useState(null);
@@ -21,10 +22,8 @@ export default function PostPage() {
 
 	return (
 		<div className="PostPage">
-				
-			<Routes>
-				<Route exact path='/post' element={	<Post post={post}/> }></Route>
-			</Routes>
+			<Post post={post} />
+	
 		</div>
 	)
 }
