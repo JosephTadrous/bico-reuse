@@ -1,6 +1,11 @@
 let express= require('express');
 let app= express();
 let cors= require('cors');
+var mongoose = require('mongoose');
+
+var bodyParser = require('body-parser');
+app.use(bodyParser.urlencoded({ extended: true }));
+
 
 // set up BodyParser
 var bodyParser = require('body-parser');
@@ -13,7 +18,7 @@ let Post= require('./dbfiles/Post.js');
 
 app.get("/api", (req, res) => {
 	// get all documents
-	let posts= Post.find()
+	Post.find()
 	.populate('seller')
 	.then(
 		// success
@@ -32,6 +37,7 @@ app.get("/api", (req, res) => {
 			res.status(500).send('Something went wrong');
 	});
 });
+
 
 // endpoint for viewing a list of items for sale from other sellers on the homepage
 app.use("/all", (req, res) => {
@@ -129,6 +135,51 @@ app.use("/edit", (req, res) => {
 
 
 
+app.get("/post", (req, res) => {
+	let pid= req.query.pid;
+	console.log(pid);
+	Post.findById(pid)
+			res.json(post);
+		}, // failure
+		(error) => {
+			res.status(500).send('Something went wrong');
+		});
+});
+
+
+app.use("/create_post", (req, res) => {
+	// create a new post for sales 
+	user_id = req.body.user_id;
+	title = req.body.title; 
+	description = req.body.description; 
+	price = Number(req.body.price); 
+	let newPost= new Post({
+		_id: new mongoose.Types.ObjectId(),
+		seller: user_id,
+		title: title,
+		date: Date.now(),
+		description: description, 
+		price: price,
+		photos: [],
+		status: 'available'
+	  });
+	const post_result= newPost.save();
+	post_result.then((response) =>  { res.json("Successfully added a new post") }, 
+	(error) => {
+		res.status(500).send("Something went wrong"); 
+	})
+});
+
+app.use("/delete_post", (req, res) => {
+	// delete a post for sales 
+	// to use the API, send a request to /delete_post?id=[your_post_id]
+	post_id = req.query.id; 
+	console.log("Deleting post " + post_id); 
+	Post.deleteOne({ '_id': post_id }).then((response) =>  { res.json("Successfully deleted a post") }, 
+	(error) => {
+		res.status(500).send("Something went wrong"); 
+	}); 
+});
 
 
 app.listen(3000, () => {
