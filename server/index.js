@@ -149,59 +149,39 @@ app.use("/all", (req, res) => {
 });
 
 // endpoint for editing currently active posts such as updating the description and price 
-app.use("/edit", (req, res) => {
+app.use("/edit_post", (req, res) => {
+	if (!req.query.id) {
+		// if post id is missing
+        res.json( { 'status' : 'missing Data' });
+	}
+
 	var postId = req.query.id;
-	var userName = req.query.name;
 	var newTitle = req.query.title;
-	var newDate = req.query.date;
-	var newDesc = req.query.description; // double check
+	var newDesc = req.query.description; 
 	var newPrice = Number(req.query.price);
 	var newPhotos = req.query.photos;
 	var newStatus = req.query.status;
 
-	if (!req.query.id || !req.query.userName) {
-		// if the id is missing
-        res.json( { 'status' : 'missing data' });
-	}
+	var filter = {'_id' : postId};
 
-	var filter = {'_id' : postId, 'seller': userName};
-
-	var action = { '$set' : { 'title' :  newTitle, 'date': newDate, 'description': newDesc, 
+	var action = { '$set' : { 'title' :  newTitle, 'description': newDesc, 
 	'price': newPrice, 'photos': newPhotos, 'status': newStatus} };
 
-	Post.findOneAndUpdate( filter, action, (err, p) => {
-		if (err) {
-			// if an error occurs in acessing the database
-			res.status(500).send("Something went wrong"); 
+	let updatedPost = Post.findOneAndUpdate(filter, action)
+	.then(
+		(oldPost) => {
+			if (!oldPost) {
+				res.json({'status' : 'no post found'});
+			} else {
+				res.json({'status' : 'updated the post'});
+			}
+		},
+		(error) => {
+			// if an error occurs 
+			res.status(500).send('Something went wrong');
 		}
-		else if (!p) {
-			var newp = new Post ({
-				_id: req.query.id,
-				seller: userId,
-				title: newTitle,
-				date: newDate,
-				description: newDesc,
-				price: newPrice,
-				photos: newPhotos,
-				status: newStatus,
-			});
-
-				newp.save( (err) => {
-				if (err) {
-					res.status(500).send("Something went wrong"); 
-					}
-					else {
-						res.json( { 'status' : 'created' } );
-				}
-					});
-		 }
-		 else {
-				 res.json( { 'status' : 'updated' } );
-		 }
-  });
+	);
 });
-
-
 
 app.get("/post", (req, res) => {
 	let pid= req.query.pid;
