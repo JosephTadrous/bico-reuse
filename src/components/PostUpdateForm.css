@@ -1,3 +1,4 @@
+/*
 .Editform {
 	display: block;
 	font-size: 35x;
@@ -7,9 +8,21 @@
 	height: 100vh;
 	padding: 0.5px;
 	margin: 0.5px;
-	/* border: 1px solid red; */
 	margin: 0vw;
 	position: relative;
+}
+*/
+
+.Editform {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: var(--fuscous-gray);
+	padding: 8px;
+}
+
+.Editform form {
+	color: var(--fuscous-gray);
 }
 
 .Editform input, textarea {
@@ -26,4 +39,4 @@
 
 .Editform textarea {
 	height: 10vh;
-  }
+}

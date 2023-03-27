@@ -28,13 +28,6 @@ export default function PostPage() {
 	return (
 		<div className="PostPage">
 			<Post post={post} />
-
-			<div className="EditButton">
-				<NavLink className="CreateEditButton" to={'/editPost/' + pid} state={{post: post}}>
-					<h3>Edit</h3>
-				</NavLink>	
-			</div>
-	
 		</div>
 	)
 }

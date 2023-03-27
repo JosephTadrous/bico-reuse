@@ -17,9 +17,9 @@ export default function Header() {
 					<h3>+ New Post</h3>
 				</NavLink>
 				
-				<NavLink to={'/profile'}>
+				{/* <NavLink to={'/profile'}>
 					<img className="pfp" src={PFP} alt="PFP" />
-				</NavLink>
+				</NavLink>  */}
 			</div>
 			
 		</div>

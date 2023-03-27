@@ -1,8 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import PostUpdateForm from './PostUpdateForm';
-import { Routes, Route } from 'react-router-dom';
-import { useEffect } from 'react';
 import { useState } from 'react';
 
 
@@ -44,7 +42,10 @@ export default function Post({post}) {
 					<p className="Description">{post.description}</p>
 					<form action="http://localhost:3000/delete_post" method="post">
 					<input type="hidden" name="id" value= {post._id} />
-					<button> Delete</button>
+					<button className="EditButton"> Delete</button>
+					<NavLink className="CreateEditButton" to={'/editPost/' + post._id} state={{post: post}}>
+						<button className="EditButton">Edit</button>
+					</NavLink>	
 					</form>
 			</div>
 		}

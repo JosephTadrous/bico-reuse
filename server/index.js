@@ -23,6 +23,7 @@ app.use("/profile", (req, res) => {
 	if (req.query.id) {
 		var filter = {'_id' : req.query.id};
 		let user = User.findOne(filter)
+		.populate('history')
 		.then(
 			// success
 			(user) => {
@@ -223,7 +224,7 @@ app.use("/create_post", (req, res) => {
 		date: Date.now(),
 		description: description, 
 		price: price,
-		photos: [photo],
+		photos: (photo) ? [photo] : [],
 		status: 'available'
 	  });
 	const post_result= newPost.save();

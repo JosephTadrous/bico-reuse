@@ -28,18 +28,18 @@ export default function PostUpdateForm() {
 
 	return (
 
-		<div className="Editform">
+		<div className="EditForm">
         <form action="http://localhost:3000/edit_post/" method="post">
-            Id: <input name="id" defaultValue={post._id}/> <p> </p>
+            <input type="hidden" name="id" defaultValue={post._id}/> <p> </p>
             Title: <input name="title" defaultValue={post.title} />  <p> </p>
             Description: <input name="description" defaultValue={post.description}/> <p> </p>
             Price: <input name="price" defaultValue={post.price}/> <p> </p>
-            Image: <input type="image" name="image" defaultValue={post.image}/> <p> </p>
+            Image: <input name="image" defaultValue={post.image}/> <p> </p>
             Status: <input name="status" defaultValue={post.status}/> <p> </p>
             {/* <button onClick={clickHandler} type="submit">Cancel</button>	 
             <button onClick={clickHandler} type="submit">Submit</button>	 */}
-            <button type="submit">Cancel</button>	 
-            <button type="submit">Submit</button>	
+						<button onClick={clickHandler} className="EditButton" type="submit">Cancel</button>	 
+            <button className="EditButton" type="submit">Submit</button>	
         </form>
         </div>
 

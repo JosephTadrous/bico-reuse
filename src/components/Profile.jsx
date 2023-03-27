@@ -14,6 +14,7 @@ export default function Profile() {
 	const userId = state.sellerId;
 
 	useEffect( () => {
+		console.log(userId);
 		fetch('http://localhost:3000/profile?id=' + userId) // TODO: dynamic id
 		.then((res) => res.json())
 		.then((user) => {
