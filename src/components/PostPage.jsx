@@ -20,7 +20,10 @@ export default function PostPage() {
 		.then((res) => res.json())
 		.then((post) => {
 			setPost(post);
-		})});
+		})
+		.catch((err) =>
+			console.log(err)
+		)}, [location]);
 
 	return (
 		<div className="PostPage">

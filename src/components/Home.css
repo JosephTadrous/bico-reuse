@@ -8,32 +8,63 @@ ul {
 
 .PostLinks {
 	display: flex;
+	justify-content: space-around;
 	padding: 12px;
-	flex-direction: column;
+	flex-wrap: wrap;
 	gap: 16px;
 }
 
 .HomePost {
 	flex: 1;
 	display: flex;
-	justify-content: flex-start;
+	flex-direction: column;
+	justify-content: center;
 	align-items: center;
-	background-color: #E7E9EB;
+	background-color: #F7F9FB;
 	margin: 0;
 	padding: 4px;
 	border-radius: 16px;
+	border-color: var(--light-gray);
+	border-style: solid;
+	border-width: 2px;
+
+	min-width: 320px;
+	min-height: 320px;
 }
 
-.HomePost .Container {
+
+
+.PostInfo {
+	color: var(--fern);
+}
+
+.PostInfo:hover {
+	color: var(--la-palma);
+}
+
+.HomePost .PostContainer {
 	display: flex;
+	flex-direction: column;
 	align-items: center;
 }
 
 .HomePost:hover {
-	background-color: #C7C9CB;
+	border-color: var(--fuscous-gray);
 }
 
 .HomePage {
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
 }
 
+.PostSeller {
+	color: var(--light-gray);
+}
+
+.PostPrice {
+	margin-top: 16px;
+	font-size: 28px;
+}
+
+.PostSeller:hover {
+	color: var(--fuscous-gray);
+}
