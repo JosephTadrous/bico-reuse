@@ -135,12 +135,12 @@ app.use("/edit_post", (req, res) => {
 	var newTitle = req.body.title;
 	var newDesc = req.body.description; 
 	var newPrice = Number(req.body.price);
-	var newPhotos = req.body.photos;
+	var newPhotos = req.body.image;
 	var newStatus = req.body.status;
 
 	var filter = {'_id' : postId};
 
-	var action = { '$set' : { 'title' :  newTitle, 'description': newDesc, 'price': newPrice, 'photos': newPhotos, 'status': newStatus} };
+	var action = { '$set' : { 'title' :  newTitle, 'description': newDesc, 'price': newPrice, 'photos': [newPhotos], 'status': newStatus} };
 
 	let updatedPost = Post.findOneAndUpdate(filter, action)
 	.then(
