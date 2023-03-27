@@ -67,7 +67,7 @@ app.get("/api", (req, res) => {
 
 app.use("/update", (req, res) => {
 	var filter = { '_id' : req.query.id };
-	var action = { '$set': {'name' : req.body.name, 'email' : req.body.email, 'phone' : req.body.phone} };
+	var action = { '$set': {'name' : req.body.name, 'email' : req.body.email, 'phone' : req.body.phone, 'college' : req.body.college} };
 	let updatedUser = User.findOneAndUpdate(filter, action)
 	.then(
 		(orig) => {
