@@ -149,59 +149,74 @@ app.use("/all", (req, res) => {
 });
 
 // endpoint for editing currently active posts such as updating the description and price 
-app.use("/edit", (req, res) => {
-	var postId = req.query.id;
-	var userName = req.query.name;
-	var newTitle = req.query.title;
-	var newDate = req.query.date;
-	var newDesc = req.query.description; // double check
-	var newPrice = Number(req.query.price);
-	var newPhotos = req.query.photos;
-	var newStatus = req.query.status;
+app.use("/edit_post", (req, res) => {
+	// if (!req.body.id) {
+	// 	// if post id is missing
+    //     res.json( { 'status' : 'missing Data' });
+	// }
 
-	if (!req.query.id || !req.query.userName) {
-		// if the id is missing
-        res.json( { 'status' : 'missing data' });
-	}
+	var postId = req.body.id;
+	var newTitle = req.body.title;
+	var newDesc = req.body.description; 
+	var newPrice = Number(req.body.price);
+	var newPhotos = req.body.photos;
+	var newStatus = req.body.status;
 
-	var filter = {'_id' : postId, 'seller': userName};
+	var filter = {'_id' : postId};
 
-	var action = { '$set' : { 'title' :  newTitle, 'date': newDate, 'description': newDesc, 
-	'price': newPrice, 'photos': newPhotos, 'status': newStatus} };
+	var action = { '$set' : { 'title' :  newTitle, 'description': newDesc, 'price': newPrice, 'photos': newPhotos, 'status': newStatus} };
 
-	Post.findOneAndUpdate( filter, action, (err, p) => {
-		if (err) {
-			// if an error occurs in acessing the database
-			res.status(500).send("Something went wrong"); 
+	let updatedPost = Post.findOneAndUpdate(filter, action)
+	.then(
+		(oldPost) => {
+			if (!oldPost) {
+				res.json({'status' : 'no post found'});
+			} else {
+				// res.json({'status' : 'updated the post'});
+				res.redirect('http://localhost:5173/');
+			}
+		},
+		(error) => {
+			// if an error occurs 
+			res.status(500).send('Something went wrong');
 		}
-		else if (!p) {
-			var newp = new Post ({
-				_id: req.query.id,
-				seller: userId,
-				title: newTitle,
-				date: newDate,
-				description: newDesc,
-				price: newPrice,
-				photos: newPhotos,
-				status: newStatus,
-			});
-
-				newp.save( (err) => {
-				if (err) {
-					res.status(500).send("Something went wrong"); 
-					}
-					else {
-						res.json( { 'status' : 'created' } );
-				}
-					});
-		 }
-		 else {
-				 res.json( { 'status' : 'updated' } );
-		 }
-  });
+	);
 });
 
+// app.use("/edit_post", (req, res) => {
+// 	// if (!req.query.id) {
+// 	// 	// if post id is missing
+//     //     res.json( { 'status' : 'missing Data' });
+// 	// }
 
+// 	var postId = req.body.id;
+// 	var newTitle = req.body.title;
+// 	var newDesc = req.body.description; 
+// 	var newPrice = Number(req.body.price);
+// 	var newPhotos = req.body.photos;
+// 	var newStatus = req.body.status;
+
+// 	var filter = {'_id' : postId};
+
+// 	var action = { '$set' : { 'title' :  newTitle, 'description': newDesc, 
+// 	'price': newPrice, 'photos': newPhotos, 'status': newStatus} };
+
+// 	let updatedPost = Post.findOneAndUpdate(filter, action)
+// 	.then(
+// 		(oldPost) => {
+// 			if (!oldPost) {
+// 				res.json({'status' : 'no post found'});
+// 			} else {
+// 				res.json({'status' : 'updated the post'});
+// 			}
+// 		},
+// 		(error) => {
+// 			// if an error occurs 
+// 			console.log(error);
+// 			res.status(500).send('Something went wrong');
+// 		}
+// 	);
+// });
 
 app.get("/post", (req, res) => {
 	let pid= req.query.pid;

@@ -1,5 +1,10 @@
-import React, { useEffect } from 'react';
+import React from 'react';
+import { NavLink } from 'react-router-dom';
+import PostUpdateForm from './PostUpdateForm';
+import { Routes, Route } from 'react-router-dom';
+import { useEffect } from 'react';
 import { useState } from 'react';
+
 
 
 export default function Post({post}) {
@@ -24,6 +29,7 @@ export default function Post({post}) {
 							<h5>Phone:  {post.seller.phone}</h5>
 						</div>
 					</div>
+					
 					<div className="pictures">
 						{
 							post.photos.map((picture) => {
