@@ -1,21 +1,35 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
+import { Route, Routes, useLocation } from 'react-router-dom';
 import ProfileInfo from './ProfileInfo';
+import {NavLink} from 'react-router-dom';
+import "./Profile.css"
+
 
 export default function Profile() {
 	const [user, setUser] = useState([]);
 
+	const location= useLocation();
+	const { state }= location;
+	const userId = state.sellerId;
+
 	useEffect( () => {
-		fetch('http://localhost:3000/profile?id=64186a1d476ee3e3a7151640') // TODO: dynamic id
+		fetch('http://localhost:3000/profile?id=' + userId) // TODO: dynamic id
 		.then((res) => res.json())
 		.then((user) => {
 			setUser(user);
 		});
-	}, []);
+	}, [location]);
 
 	return (
-		<div className="Profile}">
+		<div className="Profile">
 			<ProfileInfo user={user} />
+			<NavLink 
+				to={'/editProfile'}
+				state={{user: user}}>
+				<button className= "EditButton">Edit User</button>
+			</NavLink>
+			
 		</div>
 	)
 }

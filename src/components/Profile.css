@@ -1,0 +1,28 @@
+.ProfileInfo {
+    text-align: left;
+    margin: 20px;
+
+}
+
+.ProfileInfo h1, h3 {
+    color: var(--fuscous-gray);
+    margin-left: 0px;
+}
+
+.EditButton {
+    font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+    font-size: 24px;
+    background-color: var(--fern);
+    margin: 10px;
+}
+
+.EditForm {
+    color: var(--fern);
+    font-size: 25px;
+    margin: 20px;
+}
+
+.EditForm input {
+    font-size: 20px;
+    margin: 10px;
+}
