@@ -42,6 +42,10 @@ export default function Post({post}) {
 						}
 					</div>
 					<p className="Description">{post.description}</p>
+					<form action="http://localhost:3000/delete_post" method="post">
+					<input type="hidden" name="id" value= {post._id} />
+					<button> Delete</button>
+					</form>
 			</div>
 		}
 	}

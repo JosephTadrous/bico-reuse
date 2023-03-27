@@ -215,6 +215,7 @@ app.use("/create_post", (req, res) => {
 	title = req.body.title; 
 	description = req.body.description; 
 	price = Number(req.body.price); 
+	photo = req.body.photo
 	let newPost= new Post({
 		_id: new mongoose.Types.ObjectId(),
 		seller: user_id,
@@ -222,11 +223,11 @@ app.use("/create_post", (req, res) => {
 		date: Date.now(),
 		description: description, 
 		price: price,
-		photos: [],
+		photos: [photo],
 		status: 'available'
 	  });
 	const post_result= newPost.save();
-	post_result.then((response) =>  { res.json("Successfully added a new post") }, 
+	post_result.then((response) =>  { res.redirect("http://localhost:5173/")}, 
 	(error) => {
 		res.status(500).send("Something went wrong"); 
 	})
@@ -235,9 +236,10 @@ app.use("/create_post", (req, res) => {
 app.use("/delete_post", (req, res) => {
 	// delete a post for sales 
 	// to use the API, send a request to /delete_post?id=[your_post_id]
-	post_id = req.query.id; 
+	post_id = req.body.id; 
+	console.log(post_id); 
 	console.log("Deleting post " + post_id); 
-	Post.deleteOne({ '_id': post_id }).then((response) =>  { res.json("Successfully deleted a post") }, 
+	Post.deleteOne({ '_id': post_id }).then((response) =>  {res.redirect("http://localhost:5173/")}, 
 	(error) => {
 		res.status(500).send("Something went wrong"); 
 	}); 
