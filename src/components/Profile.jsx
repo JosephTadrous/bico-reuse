@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { Route, Routes, useLocation } from 'react-router-dom';
 import ProfileInfo from './ProfileInfo';
 import {NavLink} from 'react-router-dom';
+import "./Profile.css"
 
 
 export default function Profile() {
@@ -26,7 +27,7 @@ export default function Profile() {
 			<NavLink 
 				to={'/editProfile'}
 				state={{id: user._id}}>
-				<button>Edit User</button>
+				<button className= "EditButton">Edit User</button>
 			</NavLink>
 			
 		</div>

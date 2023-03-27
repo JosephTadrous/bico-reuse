@@ -74,7 +74,7 @@ app.use("/update", (req, res) => {
 			if (!orig) {
 				res.json({'status' : 'no user found'});
 			} else {
-				res.json({'status' : 'success'});
+				res.redirect("http://localhost:5173/");
 			}
 		},
 		(error) => {

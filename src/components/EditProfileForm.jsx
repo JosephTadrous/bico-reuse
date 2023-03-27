@@ -10,7 +10,7 @@ export default function EditProfileForm() {
     const requestUrl = `http://localhost:3000/update?id=${userId}`;
 
 	return (
-		<html className="editForm"> 
+		<html className="EditForm"> 
             <form action={requestUrl} method="post">
             Name: <input name="name"/>  <p> </p>
             College: <input name="college"/> <p> </p>
