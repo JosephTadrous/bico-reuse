@@ -26,7 +26,7 @@ export default function Profile() {
 			<ProfileInfo user={user} />
 			<NavLink 
 				to={'/editProfile'}
-				state={{id: user._id}}>
+				state={{user: user}}>
 				<button className= "EditButton">Edit User</button>
 			</NavLink>
 			
