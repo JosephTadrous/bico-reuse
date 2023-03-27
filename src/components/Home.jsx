@@ -7,8 +7,11 @@ import './Home.css';
 import HomePostList from './HomePostList';
 import PostPage from './PostPage';
 import CreatePostForm from './CreatePostForm';
+
 import EditProfileForm from './EditProfileForm';
 import Profile from './Profile';
+import PostUpdateForm from './PostUpdateForm';
+
 
 export default function Home() {
 	const [posts, setPosts] = useState([]);
@@ -30,8 +33,7 @@ export default function Home() {
 				<Route exact path='/post' element={ <PostPage /> }></Route>
 				<Route exact path='/create' element={ <CreatePostForm /> }></Route>
 				<Route exact path='/editProfile' element={<EditProfileForm /> }></Route>
-				<Route exact path='/editPost' element={ <PostPage /> }></Route>
-				
+				<Route exact path='/editPost/:id' element={<PostUpdateForm />}></Route>
 			</Routes>
 		</div>
 	)
