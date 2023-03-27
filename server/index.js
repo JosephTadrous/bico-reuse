@@ -149,18 +149,52 @@ app.use("/all", (req, res) => {
 });
 
 // endpoint for editing currently active posts such as updating the description and price 
-// app.use("/edit_post", (req, res) => {
-// 	if (!req.query.id) {
-// 		// if post id is missing
-//         res.json( { 'status' : 'missing Data' });
-// 	}
+app.use("/edit_post", (req, res) => {
+	// if (!req.body.id) {
+	// 	// if post id is missing
+    //     res.json( { 'status' : 'missing Data' });
+	// }
 
-// 	var postId = req.query.id;
-// 	var newTitle = req.query.title;
-// 	var newDesc = req.query.description; 
-// 	var newPrice = Number(req.query.price);
-// 	var newPhotos = req.query.photos;
-// 	var newStatus = req.query.status;
+	var postId = req.body.id;
+	var newTitle = req.body.title;
+	var newDesc = req.body.description; 
+	var newPrice = Number(req.body.price);
+	var newPhotos = req.body.photos;
+	var newStatus = req.body.status;
+
+	var filter = {'_id' : postId};
+
+	var action = { '$set' : { 'title' :  newTitle, 'description': newDesc, 'price': newPrice, 'photos': newPhotos, 'status': newStatus} };
+
+	let updatedPost = Post.findOneAndUpdate(filter, action)
+	.then(
+		(oldPost) => {
+			if (!oldPost) {
+				res.json({'status' : 'no post found'});
+			} else {
+				// res.json({'status' : 'updated the post'});
+				res.redirect('http://localhost:5173/');
+			}
+		},
+		(error) => {
+			// if an error occurs 
+			res.status(500).send('Something went wrong');
+		}
+	);
+});
+
+// app.use("/edit_post", (req, res) => {
+// 	// if (!req.query.id) {
+// 	// 	// if post id is missing
+//     //     res.json( { 'status' : 'missing Data' });
+// 	// }
+
+// 	var postId = req.body.id;
+// 	var newTitle = req.body.title;
+// 	var newDesc = req.body.description; 
+// 	var newPrice = Number(req.body.price);
+// 	var newPhotos = req.body.photos;
+// 	var newStatus = req.body.status;
 
 // 	var filter = {'_id' : postId};
 
@@ -178,45 +212,11 @@ app.use("/all", (req, res) => {
 // 		},
 // 		(error) => {
 // 			// if an error occurs 
+// 			console.log(error);
 // 			res.status(500).send('Something went wrong');
 // 		}
 // 	);
 // });
-
-app.use("/edit_post", (req, res) => {
-	// if (!req.query.id) {
-	// 	// if post id is missing
-    //     res.json( { 'status' : 'missing Data' });
-	// }
-
-	var postId = req.body.id;
-	var newTitle = req.body.title;
-	var newDesc = req.body.description; 
-	var newPrice = Number(req.body.price);
-	var newPhotos = req.body.photos;
-	var newStatus = req.body.status;
-
-	var filter = {'_id' : postId};
-
-	var action = { '$set' : { 'title' :  newTitle, 'description': newDesc, 
-	'price': newPrice, 'photos': newPhotos, 'status': newStatus} };
-
-	let updatedPost = Post.findOneAndUpdate(filter, action)
-	.then(
-		(oldPost) => {
-			if (!oldPost) {
-				res.json({'status' : 'no post found'});
-			} else {
-				res.json({'status' : 'updated the post'});
-			}
-		},
-		(error) => {
-			// if an error occurs 
-			console.log(error);
-			res.status(500).send('Something went wrong');
-		}
-	);
-});
 
 app.get("/post", (req, res) => {
 	let pid= req.query.pid;
