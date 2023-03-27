@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useState } from 'react';
 
 
 export default function Post({post}) {
+	const [ currentPic, setCurrentPic ] = useState();
 
 	function CreatePost() {
 		// this means post is null or undefined
@@ -10,23 +12,26 @@ export default function Post({post}) {
 		} else { // generate the post component
 			return <div className="Post">
 					<div className="PostHeader">
-						<h1>{post.title} - ${post.price}</h1>
-						<h5>{(new Date(post.date)).toLocaleString()}</h5>
+
+						<div className="PostTitleAndDate">
+							<h1>{post.title} - ${post.price}</h1>
+							<h5>{(new Date(post.date)).toLocaleString()}</h5>
+						</div>
 
 						<div className="SellerInfo">
 							<h5>Seller: {post.seller.name}</h5>
 							<h5>Email:  {post.seller.email}</h5>
 							<h5>Phone:  {post.seller.phone}</h5>
 						</div>
-
-						<div className="EditButton">
-							
-						</div>
 					</div>
 					<div className="pictures">
 						{
 							post.photos.map((picture) => {
-								return <img src={picture} alt="picture" />
+								import(`../assets/${picture}.svg`).then((image) => {
+									setCurrentPic(image.default);
+								}).catch((err) => 
+									console.log("Something went wrong with importing picture"));
+								return <img key={Date.now()} src={currentPic} alt="picture" />
 							})
 						}
 					</div>
