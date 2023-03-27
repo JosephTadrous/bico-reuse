@@ -20,18 +20,14 @@ export default function PostPage() {
 		.then((res) => res.json())
 		.then((post) => {
 			setPost(post);
-		})}, [location]);
+		})});
 
 	return (
 		<div className="PostPage">
 			<Post post={post} />
 
-			<Routes>
-				<Route exact path='/editPost' element={ <PostUpdateForm post={post}/>}></Route>
-			</Routes>
-
 			<div className="EditButton">
-				<NavLink className="CreateEditButton" to={'/editPost'}>
+				<NavLink className="CreateEditButton" to={'/editPost/' + pid} state={{post: post}}>
 					<h3>Edit</h3>
 				</NavLink>	
 			</div>

@@ -21,15 +21,8 @@ export default function Post({post}) {
 							<h5>Email:  {post.seller.email}</h5>
 							<h5>Phone:  {post.seller.phone}</h5>
 						</div>
-{/* 
-						<button className="EditButton" onClick={() => navigate('/editPost')}>
-          					Edit
-       					</button> */}
 
 					</div>
-					{/* <div className="UpdateFormPage">
-						
-					</div> */}
 					
 					<div className="pictures">
 						{
