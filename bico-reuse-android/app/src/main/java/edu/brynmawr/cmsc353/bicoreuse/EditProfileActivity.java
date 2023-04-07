@@ -59,7 +59,6 @@ public class EditProfileActivity extends AppCompatActivity {
         btnSubmitEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.i("A7a", "dost");
                 submitData();
             }
         });
