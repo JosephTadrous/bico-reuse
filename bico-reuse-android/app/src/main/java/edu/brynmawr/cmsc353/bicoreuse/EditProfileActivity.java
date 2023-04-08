@@ -110,6 +110,8 @@ public class EditProfileActivity extends AppCompatActivity {
             // but it should be okay for our purposes (and is a lot easier)
             executor.awaitTermination(2, TimeUnit.SECONDS);
 
+
+
         }
         catch (Exception e) {
             // uh oh
