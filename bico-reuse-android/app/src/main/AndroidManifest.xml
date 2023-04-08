@@ -14,7 +14,7 @@
         android:theme="@style/Theme.BicoReuse"
         android:usesCleartextTraffic="true">
         
-        <activity>
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
@@ -27,10 +27,6 @@
         <activity
           android:name=".ProfileActivity"
           android:exported="false" />
-      
-        <activity
-            android:name=".RegisterLoginInfoActivity"
-            android:exported="false" />
         <activity
             android:name=".RegisterActivity"
             android:exported="false" />
