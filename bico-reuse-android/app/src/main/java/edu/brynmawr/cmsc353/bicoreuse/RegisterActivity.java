@@ -81,17 +81,21 @@ public class RegisterActivity extends AppCompatActivity {
             existsError= true;
         }
 
-        if (existsError) {
-            
-        } else {
+        if (!existsError) {
             RegistrationInfo registrationInfo= new RegistrationInfo(name, college, email, password, phone);
 
             registrationInfo.submitData();
-            Toast.makeText(getApplicationContext(),
-                    "You have successfully registered!\n You can now login!",
-                    Toast.LENGTH_LONG).show();
+            if (registrationInfo.isSuccess()) {
+                Toast.makeText(getApplicationContext(),
+                        "You have successfully registered!\n You can now login!",
+                        Toast.LENGTH_LONG).show();
 
-            this.finish();
+                this.finish();
+            } else {
+                Toast.makeText(getApplicationContext(),
+                        "Something went wrong. Try again!",
+                        Toast.LENGTH_LONG).show();
+            }
         }
     }
 

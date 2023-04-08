@@ -23,6 +23,8 @@ public class RegistrationInfo {
     private String password;
     private String phone;
 
+    private boolean success= false;
+
     public RegistrationInfo(String name, String college, String email, String password, String phone) {
         this.name= name;
         this.college= college;
@@ -58,9 +60,9 @@ public class RegistrationInfo {
 
                             int responseCode = conn.getResponseCode();
                             if (responseCode == HttpURLConnection.HTTP_OK) {
-                                InputStream in = conn.getInputStream();
+                                success= true;
                             } else {
-                                // Handle error response from server
+                                success= false;
                             }
 
 
@@ -94,5 +96,9 @@ public class RegistrationInfo {
             builder.append(key).append("=").append(data.get(key));
         }
         return builder.toString();
+    }
+
+    public boolean isSuccess() {
+        return success;
     }
 }

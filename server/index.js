@@ -293,7 +293,7 @@ app.use("/create_user", (req, res) => {
 
 	const user_result= newUser.save();
 
-	user_result.then((response) =>  { res.redirect("http://localhost:5173/")}, 
+	user_result.then((response) =>  { console.log("Successfully created new user") }, 
 	(error) => {
 		console.log(error);
 		res.status(500).send("Something went wrong"); 
