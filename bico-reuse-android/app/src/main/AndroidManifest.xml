@@ -14,7 +14,10 @@
         android:theme="@style/Theme.BicoReuse"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".RegistrationActivity"
+            android:name=".RegisterLoginInfoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".RegisterActivity"
             android:exported="false" />
         <activity
             android:name=".LoginActivity"
@@ -27,11 +30,10 @@
         </activity>
         <activity
             android:name=".EditProfileActivity"
-            android:exported="false"></activity>
+            android:exported="false" />
         <activity
             android:name=".MainActivity"
-            android:exported="false"></activity>
-
+            android:exported="false" />
 
         <meta-data
             android:name="preloaded_fonts"

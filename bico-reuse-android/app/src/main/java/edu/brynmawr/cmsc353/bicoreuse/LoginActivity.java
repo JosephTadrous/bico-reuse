@@ -2,16 +2,11 @@ package edu.brynmawr.cmsc353.bicoreuse;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
-
-import java.security.SecureRandom;
-import java.security.spec.KeySpec;
-
-import javax.crypto.SecretKeyFactory;
-import javax.crypto.spec.PBEKeySpec;
 
 import edu.brynmawr.cmsc353.bicoreuse.info.LoginInfo;
 
@@ -40,7 +35,9 @@ public class LoginActivity extends AppCompatActivity {
 
     // redirects to register activity
     public void onRegisterButtonClick(View v) {
+        Intent i= new Intent(this, RegisterActivity.class);
 
+        this.startActivity(i);
     }
 
     public void onLoginButtonClick(View v) {
@@ -64,12 +61,15 @@ public class LoginActivity extends AppCompatActivity {
                     Toast.LENGTH_LONG).show();
         } else {
             loginInfo= new LoginInfo(email, password);
-            loginInfo.getData();
-
-
-            Toast.makeText(getApplicationContext(),
-                    "Successfully logged in!",
-                    Toast.LENGTH_LONG).show();
+            if (loginInfo.getData() != null) { // success
+                Toast.makeText(getApplicationContext(),
+                        "Successfully logged in!",
+                        Toast.LENGTH_LONG).show();
+            } else {
+                Toast.makeText(getApplicationContext(),
+                        "Could not log in. Try again!",
+                        Toast.LENGTH_LONG).show();
+            }
         }
 
     }

@@ -248,8 +248,8 @@ app.use("/delete_post", (req, res) => {
 
 
 app.post("/login_user", (req, res) => {
-		let reqEmail= req.query.email;
-		let reqPass= req.query.password;
+		let reqEmail= req.body.email;
+		let reqPass= req.body.password;
 		
 	  let filter = {'email' : reqEmail};
 

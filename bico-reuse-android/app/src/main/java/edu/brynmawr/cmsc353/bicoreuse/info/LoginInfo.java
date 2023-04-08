@@ -20,7 +20,7 @@ import org.json.simple.parser.JSONParser;
 public class LoginInfo {
     private String email;
     private String password;
-    private UserInfo userInfo;
+    private UserInfo userInfo= null;
 
 
     public LoginInfo(String email, String password) {
@@ -28,7 +28,8 @@ public class LoginInfo {
         this.password= password;
     }
 
-    public void getData() {
+    public UserInfo getData() {
+
         try {
             ExecutorService executor = Executors.newSingleThreadExecutor();
             executor.execute( () -> {
@@ -69,11 +70,10 @@ public class LoginInfo {
                         // this will now be set as our current user
                         userInfo= new UserInfo(id, name, college, email, phone);
 
+
                     } else {
                         // Handle error response from server
                     }
-
-
                 }
                 catch (Exception e) {
                     Log.v("LoginInfo", e.getMessage());
@@ -91,6 +91,8 @@ public class LoginInfo {
             // uh oh
             e.printStackTrace();
         }
+
+        return userInfo;
     }
 
     // format data to be sent in the request body
