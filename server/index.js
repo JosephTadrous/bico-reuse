@@ -247,6 +247,61 @@ app.use("/delete_post", (req, res) => {
 });
 
 
+app.post("/login_user", (req, res) => {
+		let reqEmail= req.body.email;
+		let reqPass= req.body.password;
+		
+	  let filter = {'email' : reqEmail};
+
+		User.findOne(filter)
+		.populate('history')
+		.populate('bookmarked').then(
+			(user) => {
+				if (user.validatePassword(reqPass)) {
+					res.json(user);
+				} else {
+					res.status(400).send("Wrong password");
+				}
+			}, (error) => {
+				res.status(400).send("User not found");
+			}
+		)
+	}
+);
+
+
+app.use("/create_user", (req, res) => {
+	// create a new post for sales 
+	reqName= req.body.name;
+	reqEmail= req.body.email;
+	reqPhone= req.body.phone;
+	reqCollege= req.body.college;
+	reqPass= req.body.password;
+
+	let newUser= new User({
+		_id: new mongoose.Types.ObjectId(),
+		name: reqName,
+		email: reqEmail,
+		phone: reqPhone,
+		college: reqCollege,
+		pfp: null,
+		history: [],
+		bookmarked: [],
+	});
+
+	newUser.setPassword(reqPass);
+
+	const user_result= newUser.save();
+
+	user_result.then((response) =>  { console.log("Successfully created new user") }, 
+	(error) => {
+		console.log(error);
+		res.status(500).send("Something went wrong"); 
+	});
+});
+
+
+
 app.listen(3000, () => {
 	console.log('Listening on port 3000');
 });
