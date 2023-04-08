@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/PostCreate"
+        android:layout_width="match_parent"
+        android:layout_height="63dp"
+        android:background="@color/primary"
+        android:fontFamily="@font/poppins_semibold"
+        android:text="  Create A Post"
+        android:textColor="#FFFFFF"
+        android:textSize="36sp" />
+
+    <TextView
+        android:id="@+id/UserID"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="0dp"
+        android:fontFamily="@font/poppins_semibold"
+        android:text="User ID"
+        android:textColor="#2D3047"
+        android:textSize="20sp" />
+
+    <EditText
+        android:id="@+id/UserIDInput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="15dp"
+        android:fontFamily="@font/poppins"
+        android:inputType="text"
+        android:maxLines="1"
+        android:textColor="@color/primary"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/Title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="0dp"
+        android:fontFamily="@font/poppins_semibold"
+        android:text="Title"
+        android:textColor="#2D3047"
+        android:textSize="20sp" />
+
+    <EditText
+        android:id="@+id/TitleInput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="15dp"
+        android:fontFamily="@font/poppins"
+        android:inputType="text"
+        android:maxLines="1"
+        android:textColor="@color/primary"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/Description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="0dp"
+        android:fontFamily="@font/poppins_semibold"
+        android:text="Description"
+        android:textColor="#2D3047"
+        android:textSize="20sp" />
+
+    <EditText
+        android:id="@+id/DescriptionInput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="15dp"
+        android:fontFamily="@font/poppins"
+        android:inputType="text"
+        android:maxLines="1"
+        android:textColor="@color/primary"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/Price"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="0dp"
+        android:fontFamily="@font/poppins_semibold"
+        android:text="Price"
+        android:textColor="#2D3047"
+        android:textSize="20sp" />
+
+    <EditText
+        android:id="@+id/PriceInput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="15dp"
+        android:fontFamily="@font/poppins"
+        android:inputType="text"
+        android:maxLines="1"
+        android:textColor="@color/primary"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/Photo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="0dp"
+        android:fontFamily="@font/poppins_semibold"
+        android:text="Photo"
+        android:textColor="#2D3047"
+        android:textSize="20sp" />
+
+    <EditText
+        android:id="@+id/PhotoInput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="15dp"
+        android:fontFamily="@font/poppins"
+        android:inputType="number"
+        android:maxLines="1"
+        android:textColor="@color/primary"
+        android:textSize="16sp" />
+
+
+    <Button
+        android:id="@+id/btnSubmitCreatePost"
+        android:layout_width="300dp"
+        android:layout_height="55dp"
+        android:layout_marginStart="56dp"
+        android:layout_marginBottom="10dp"
+        android:backgroundTint="@color/secondary"
+        android:fontFamily="@font/poppins_semibold"
+        android:text="Submit" />
+
+</LinearLayout>
