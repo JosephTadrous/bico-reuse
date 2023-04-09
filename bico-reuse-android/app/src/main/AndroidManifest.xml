@@ -14,10 +14,10 @@
         android:theme="@style/Theme.BicoReuse"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".PostActivity"
+            android:name=".RegisterActivity"
             android:exported="false" />
         <activity
-            android:name=".RegisterActivity"
+            android:name=".PostActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
