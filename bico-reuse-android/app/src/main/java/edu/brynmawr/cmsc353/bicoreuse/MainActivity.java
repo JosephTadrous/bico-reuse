@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import org.json.JSONObject;
+import org.json.JSONArray;
 
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -44,11 +45,15 @@ public class MainActivity extends AppCompatActivity {
                             Scanner in = new Scanner(url.openStream());
                             String response = in.nextLine();
 
-                            JSONObject jo = new JSONObject(response);
+                            JSONArray dataArray = new JSONArray(response);
 
-                            // need to set the instance variable in the Activity object
-                            // because we cannot directly access the TextView from here
-                            message = jo.getString("message");
+                            for (int i = 0; i < dataArray.length(); i++) {
+                                JSONObject jo = dataArray.getJSONObject(i);
+                                String title = jo.get("title").toString();
+
+                                message = jo.get("title").toString();
+                                setContentView(R.layout.activity_main);
+                            }
 
                         }
                         catch (Exception e) {
