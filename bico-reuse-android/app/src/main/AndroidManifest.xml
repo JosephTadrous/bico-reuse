@@ -14,10 +14,10 @@
         android:theme="@style/Theme.BicoReuse"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".ViewPostActivity"
+            android:name=".PostActivity"
             android:exported="false" />
         <activity
-            android:name=".LoginActivity"
+            android:name=".RegisterActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -29,7 +29,7 @@
             android:name=".ProfileActivity"
             android:exported="false" />
         <activity
-            android:name=".RegisterActivity"
+            android:name=".LoginActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

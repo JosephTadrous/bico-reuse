@@ -32,6 +32,7 @@ public class RegistrationInfo {
         this.password= password;
         this.phone= phone;
 
+
         this.success= false;
     }
 

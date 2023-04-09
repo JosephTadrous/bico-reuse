@@ -19,25 +19,21 @@ public class RegisterActivity extends AppCompatActivity {
     private EditText etEmail;
     private EditText etPassword;
     private EditText etPhone;
+    private EditText etPasswordConfirm;
 
     RegistrationInfo registrationInfo;
-
-    private String name;
-    private String college;
-    private String email;
-    private String password;
-    private String phone;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
 
-        etName = findViewById(R.id.name);
-        etCollege = findViewById(R.id.college);
-        etEmail = findViewById(R.id.email);
-        etPassword = findViewById(R.id.password);
-        etPhone = findViewById(R.id.phone);
+        etName = findViewById(R.id.etName);
+        etCollege = findViewById(R.id.etCollege);
+        etEmail = findViewById(R.id.etEmail);
+        etPassword = findViewById(R.id.etPassword);
+        etPasswordConfirm = findViewById(R.id.etPasswordConfirm);
+        etPhone = findViewById(R.id.etPhone);
     }
 
 
@@ -52,11 +48,13 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     public void onRegisterButtonClick(View v) {
-        name= getInformation(etName);
-        college= getInformation(etCollege);
-        email= getInformation(etEmail);
-        password= getInformation(etPassword);
-        phone= getInformation(etPhone);
+        String name= getInformation(etName);
+        String college= getInformation(etCollege);
+        String email= getInformation(etEmail);
+        String password= getInformation(etPassword);
+        String passwordReconfirm= getInformation(etPasswordConfirm);
+        String phone= getInformation(etPhone);
+
 
         boolean existsError= false;
 
@@ -76,8 +74,17 @@ public class RegisterActivity extends AppCompatActivity {
             etPassword.setError("Password is required");
             existsError= true;
         }
+        if (passwordReconfirm.isEmpty()) {
+            etPassword.setError("Reconfirm your password");
+            existsError= true;
+        }
         if (phone.isEmpty()) {
             etPhone.setError("Phone Number is required");
+            existsError= true;
+        }
+        if (!passwordReconfirm.equals(password)) {
+            etPasswordConfirm.setError("Passwords do not match");
+            etPassword.setError("Passwords do not match");
             existsError= true;
         }
 

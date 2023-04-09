@@ -7,9 +7,9 @@
     tools:context=".LoginActivity">
 
     <View
-        android:id="@+id/ivSolidEdit"
+        android:id="@+id/SolidEdit"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
+        android:layout_height="111dp"
         android:background="@color/primary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -19,16 +19,14 @@
         android:id="@+id/login_header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:layout_marginTop="16dp"
         android:textSize="30sp"
         android:backgroundTint="@color/secondary"
         android:fontFamily="@font/poppins_semibold"
         android:textColor="#FFFFFF"
-        android:text="Login"
+        android:text="  Login"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/SolidEdit" />
 
     <TextView
         android:id="@+id/tvEmail"
