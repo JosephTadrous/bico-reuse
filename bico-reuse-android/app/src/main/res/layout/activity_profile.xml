@@ -146,6 +146,7 @@
         android:layout_marginLeft="290dp"
         android:backgroundTint="@color/secondary"
         android:fontFamily="@font/poppins_semibold"
-        android:text="Edit" />
+        android:text="Edit"
+        android:onClick="onEditButtonClick" />
 
 </LinearLayout>
