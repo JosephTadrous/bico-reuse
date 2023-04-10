@@ -5,7 +5,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginTop="56dp"
     android:background="#FFFFFF"
     tools:context=".HomePageActivity" >
 
@@ -18,17 +17,44 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
         android:orientation="vertical" >
 
-        <TextView
-            android:id="@+id/tvProfileEdit"
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/Headers"
             android:layout_width="match_parent"
-            android:layout_height="63dp"
-            android:background="@color/white"
-            android:fontFamily="@font/poppins_semibold"
-            android:text="  Today's Sales"
-            android:textColor="@color/black"
-            android:textSize="36sp" />
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:paddingBottom="16dp">
+
+            <TextView
+                android:id="@+id/tvProfileEdit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:fontFamily="@font/poppins_semibold"
+                android:text="  Today's Sales"
+                android:layout_weight="1"
+                android:textColor="@color/black"
+                android:textSize="30sp" />
+
+            <Button
+                android:id="@+id/btnCreate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:backgroundTint="@color/secondary"
+                android:fontFamily="@font/poppins_semibold"
+                android:text="+ New"
+                android:onClick="onCreateButtonClick"
+
+                android:layout_weight="1"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintVertical_bias="0.2" />
+
+        </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
             android:nestedScrollingEnabled="false"

@@ -2,6 +2,7 @@ package edu.brynmawr.cmsc353.bicoreuse;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -23,20 +24,23 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 public class CreatePostActivity extends AppCompatActivity {
-
-    private EditText UserIDInput;
+    
     private EditText TitleInput;
     private EditText DescriptionInput;
     private EditText PhotoInput;
     private EditText PriceInput;
     private Button btnSubmitCreatePost;
+    
+    private String userId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.create_post);
-
-        UserIDInput = findViewById(R.id.UserIDInput);
+        
+        Intent intent= getIntent();
+        userId= intent.getStringExtra("userId");
+        
         TitleInput = findViewById(R.id.TitleInput);
         DescriptionInput = findViewById(R.id.DescriptionInput);
         PhotoInput = findViewById(R.id.PhotoInput);
@@ -49,6 +53,8 @@ public class CreatePostActivity extends AppCompatActivity {
                 submitDataCreatePost();
             }
         });
+        
+        
     }
 
     private void submitDataCreatePost() {
@@ -68,7 +74,7 @@ public class CreatePostActivity extends AppCompatActivity {
 
                             Map<String, String> requestData = new HashMap<>();
                             requestData.put("title", TitleInput.getText().toString());
-                            requestData.put("user_id", UserIDInput.getText().toString());
+                            requestData.put("user_id", userId);
                             requestData.put("description", DescriptionInput.getText().toString());
                             requestData.put("price", PriceInput.getText().toString());
                             requestData.put("photo", PhotoInput.getText().toString());
@@ -103,6 +109,8 @@ public class CreatePostActivity extends AppCompatActivity {
             // uh oh
             e.printStackTrace();
         }
+
+        this.finish();
     }
 
     // format data to be sent in the request body

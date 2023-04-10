@@ -17,15 +17,17 @@
                 android:background="@color/primary"
                 android:fontFamily="@font/poppins_semibold"
                 android:paddingStart="12dp"
+                android:paddingTop="12dp"
                 android:text="Title"
                 android:textColor="#FFFFFF"
                 android:textSize="25sp" />
 
             <TextView
                 android:id="@+id/Name"
+                android:layout_height="wrap_content"
                 android:layout_width="match_parent"
                 android:gravity="center_vertical"
-                android:layout_height="80dp"
+                android:paddingTop="20dp"
                 android:paddingStart="12dp"
                 android:background="@color/primary"
                 android:fontFamily="@font/poppins_semibold"
@@ -33,17 +35,6 @@
                 android:text="By Seller's Name"
                 android:textSize="16sp" />
 
-            <TextView
-                android:id="@+id/Date"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/primary"
-                android:fontFamily="@font/poppins_semibold"
-                android:paddingStart="12dp"
-                android:paddingBottom="8dp"
-                android:text="Date"
-                android:textColor="#212121"
-                android:textSize="14sp" />
 
 <!--            <TextView-->
 <!--                android:id="@+id/Desc"-->
@@ -67,16 +58,6 @@
                 android:text="Price"
                 android:textSize="16sp" />
 
-            <TextView
-                android:id="@+id/Status"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/primary"
-                android:paddingStart="12dp"
-                android:fontFamily="@font/poppins_semibold"
-                android:textColor="#212121"
-                android:text="Status"
-                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/border2"

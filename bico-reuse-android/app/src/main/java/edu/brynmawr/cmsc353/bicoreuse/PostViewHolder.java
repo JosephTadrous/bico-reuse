@@ -1,26 +1,46 @@
 package edu.brynmawr.cmsc353.bicoreuse;
 
+import android.content.Context;
+import android.content.Intent;
 import android.view.View;
 import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class PostViewHolder extends RecyclerView.ViewHolder {
+public class PostViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
     TextView sellerName;
-    TextView date;
     TextView title;
     // TextView description;
-    TextView status;
     TextView price;
     View view;
 
-    PostViewHolder(View itemView) {
+    private String postId;
+    private String userId;
+
+
+
+    PostViewHolder(View itemView, String userId) {
         super(itemView);
         sellerName = (TextView)itemView.findViewById(R.id.Name);
-        date = (TextView)itemView.findViewById(R.id.Date);
         // description = (TextView)itemView.findViewById(R.id.Desc);
         title = (TextView)itemView.findViewById(R.id.Title);
-        status = (TextView)itemView.findViewById(R.id.Status);
         price = (TextView)itemView.findViewById(R.id.Price);
         view  = itemView;
+        this.userId= userId;
+        itemView.setClickable(true);
+        itemView.setOnClickListener(this);
+
+    }
+
+    public void setPostId(String postId) {
+        this.postId= postId;
+    }
+
+    @Override
+    public void onClick(View v) {
+        Intent i= new Intent (v.getContext(), PostActivity.class);
+        i.putExtra("postId", postId);
+        i.putExtra("userId", userId);
+        v.getContext().startActivity(i);
+
     }
 }

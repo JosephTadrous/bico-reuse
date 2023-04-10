@@ -38,7 +38,6 @@ public class PostActivity extends AppCompatActivity {
     private Button btnEdit;
 
     private UserInfo curUser;
-
     private PostInfo postInfo= null;
 
     @Override
@@ -49,10 +48,9 @@ public class PostActivity extends AppCompatActivity {
 
         Intent intent= getIntent();
         String postId= intent.getStringExtra("postId");
-        String curUserId= intent.getStringExtra("curUserId");
-        curUser= new UserInfo("6418b08bddfa69be902df5f3");
-        //curUser= new UserInfo("64186a1d476ee3e3a7151640");
-        postInfo= new PostInfo("6418b08bddfa69be902df5f4");
+        String curUserId= intent.getStringExtra("userId");
+        curUser= new UserInfo(curUserId);
+        postInfo= new PostInfo(postId);
 
 
 

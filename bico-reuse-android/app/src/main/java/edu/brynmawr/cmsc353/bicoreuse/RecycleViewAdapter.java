@@ -1,6 +1,7 @@
 package edu.brynmawr.cmsc353.bicoreuse;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,17 +10,23 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 public class RecycleViewAdapter extends RecyclerView.Adapter<PostViewHolder> {
     JSONArray dataArray = new JSONArray();
 
+    private String userId;
+    private String postId;
+
     Context context;
 //    ClickListener listiner;
 
-    public RecycleViewAdapter(JSONArray dataArray, Context context) {
+    public RecycleViewAdapter(JSONArray dataArray, Context context, String userId) {
         this.dataArray = dataArray;
         this.context = context;
 //        this.listiner = listiner;
+
+        this.userId= userId;
     }
 
     @Override
@@ -31,7 +38,7 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<PostViewHolder> {
 
         View photoView = inflater.inflate(R.layout.activity_individual_post_on_homepage, parent, false);
 
-        PostViewHolder viewHolder = new PostViewHolder(photoView);
+        PostViewHolder viewHolder = new PostViewHolder(photoView, userId);
         return viewHolder;
     }
 
@@ -40,16 +47,17 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<PostViewHolder> {
     onBindViewHolder(final PostViewHolder viewHolder, final int position) {
 //        final v = viewHolder.getAdapterPosition();
         try {
-            // viewHolder.sellerName.setText(dataArray.getJSONObject(position).get("seller").toString());
-            viewHolder.date.setText(dataArray.getJSONObject(position).get("date").toString());
+            JSONObject jo = dataArray.getJSONObject(position);
+            viewHolder.setPostId(jo.getString("_id"));
+            JSONObject seller = (JSONObject) jo.get("seller");
+            String name = seller.get("name").toString();
+            viewHolder.sellerName.setText(name);
             viewHolder.title.setText(dataArray.getJSONObject(position).get("title").toString());
             // viewHolder.description.setText(dataArray.getJSONObject(position).get("description").toString());
             viewHolder.price.setText("$" + dataArray.getJSONObject(position).get("price").toString());
-            viewHolder.status.setText(dataArray.getJSONObject(position).get("status").toString());
         } catch (JSONException e) {
             throw new RuntimeException(e);
         }
-
 
 
 //        viewHolder.OnClickListener clickListener = new View.OnClickListener() {

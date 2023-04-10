@@ -2,6 +2,7 @@ package edu.brynmawr.cmsc353.bicoreuse;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -22,17 +23,31 @@ import androidx.recyclerview.widget.RecyclerView;
 public class HomePageActivity extends AppCompatActivity {
     RecycleViewAdapter adapter;
     RecyclerView recyclerView;
+    private String userId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_homepage);
+
+        Intent intent= getIntent();
+
+        userId= intent.getStringExtra("userId");
+        
         JSONArray dataArray = connectToServer();
         recyclerView = (RecyclerView)findViewById(R.id.recyclerView);
-        adapter = new RecycleViewAdapter(dataArray, getApplication());
+        adapter = new RecycleViewAdapter(dataArray, getApplication(), this.userId);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(HomePageActivity.this));
 
+
+    }
+
+    public void onCreateButtonClick(View v) {
+        Intent i= new Intent(this, CreatePostActivity.class);
+        i.putExtra("userId", userId);
+
+        this.startActivity(i);
     }
 
     public void onBackPressed() {

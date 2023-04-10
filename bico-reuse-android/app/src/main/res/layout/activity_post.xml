@@ -14,12 +14,12 @@
                 android:id="@+id/tvTitle"
                 android:layout_width="match_parent"
                 android:gravity="center_vertical"
-                android:layout_height="80dp"
+                android:layout_height="wrap_content"
                 android:paddingStart="12dp"
                 android:background="@color/primary"
                 android:fontFamily="@font/poppins_semibold"
                 android:textColor="#FFFFFF"
-                android:textSize="36sp" />
+                android:textSize="30sp" />
 
             <TextView
                 android:id="@+id/tvSeller"
