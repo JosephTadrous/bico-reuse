@@ -139,22 +139,25 @@ app.use("/edit_post", (req, res) => {
 	var newStatus = req.body.status;
 
 	var filter = {'_id' : postId};
-
-	var action = { '$set' : { 'title' :  newTitle, 'description': newDesc, 'price': newPrice, 'photos': [newPhotos], 'status': newStatus} };
+	// 
+	var action = { '$set' : { 'title' :  newTitle, 'description': newDesc, 'price': newPrice, 'image': [newPhotos], 'status': newStatus} };
 
 	let updatedPost = Post.findOneAndUpdate(filter, action)
 	.then(
 		(oldPost) => {
 			if (!oldPost) {
+				// console.log("FAILURE");
 				res.json({'status' : 'no post found'});
 			} else {
 				// res.json({'status' : 'updated the post'});
+				// console.log("SUCCESS!");
 				res.redirect('http://localhost:5173/');
 			}
 		},
 		(error) => {
 			// if an error occurs 
-			res.status(500).send('Something went wrong');
+			// console.log("ERROR");
+			res.status(500).send(error);
 		}
 	);
 });
