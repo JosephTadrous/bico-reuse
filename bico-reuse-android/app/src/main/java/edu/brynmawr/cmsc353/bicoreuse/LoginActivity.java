@@ -25,8 +25,8 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        etEmail = findViewById(R.id.email);
-        etPassword = findViewById(R.id.password);
+        etEmail = findViewById(R.id.etEmail);
+        etPassword = findViewById(R.id.etPassword);
     }
 
     private String getInformation(EditText text) {
@@ -65,6 +65,12 @@ public class LoginActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(),
                         "Successfully logged in!",
                         Toast.LENGTH_LONG).show();
+
+                //Intent i= new Intent(this, HomepageActivity.class);
+                //i.putExtra("userId", loginInfo.getUserId());
+
+                //this.startActivity(i);
+
             } else {
                 Toast.makeText(getApplicationContext(),
                         "Could not log in. Try again!",

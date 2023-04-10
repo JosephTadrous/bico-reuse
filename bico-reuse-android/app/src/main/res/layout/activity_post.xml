@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvTitle"
+                android:layout_width="match_parent"
+                android:gravity="center_vertical"
+                android:layout_height="80dp"
+                android:paddingStart="12dp"
+                android:background="@color/primary"
+                android:fontFamily="@font/poppins_semibold"
+                android:textColor="#FFFFFF"
+                android:textSize="36sp" />
+
+            <TextView
+                android:id="@+id/tvSeller"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="12dp"
+                android:background="@color/primary"
+                android:fontFamily="@font/poppins_semibold"
+                android:textColor="#F0F0F0"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/tvEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="12dp"
+                android:background="@color/primary"
+                android:fontFamily="@font/poppins_semibold"
+                android:textColor="#F0F0F0"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/tvPhone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="12dp"
+                android:background="@color/primary"
+                android:fontFamily="@font/poppins_semibold"
+                android:textColor="#F0F0F0"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/tvDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="12dp"
+                android:paddingBottom="8dp"
+                android:background="@color/primary"
+                android:fontFamily="@font/poppins_semibold"
+                android:textColor="#F0F0F0"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/tvDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="12dp"
+                android:layout_marginTop="12dp"
+                android:fontFamily="@font/poppins_semibold"
+                android:textColor="#2D3047"
+                android:textSize="16sp" />
+
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/body_buttons"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="32dp"
+                android:orientation="horizontal" >
+                <Button
+                    android:id="@+id/btnDelete"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:backgroundTint="#FF3030"
+                    android:textColor="#F0F0F0"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:text="Delete"
+                    android:onClick="onDeleteButtonClick"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="60dp"
+                    android:layout_weight="1" />
+
+
+                <Button
+                    android:id="@+id/btnEdit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:backgroundTint="@color/secondary"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:text="Edit"
+                    android:onClick="onEditButtonClick"
+                    android:layout_weight="1"
+                    android:layout_marginStart="60dp"
+                    android:layout_marginEnd="20dp" />
+            </LinearLayout>
+
+
+        </LinearLayout>
+    </ScrollView>
+</layout>

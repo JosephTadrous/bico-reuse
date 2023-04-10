@@ -2,6 +2,7 @@ package edu.brynmawr.cmsc353.bicoreuse;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -16,6 +17,7 @@ import java.util.Scanner;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class ProfileActivity extends AppCompatActivity {
 
@@ -53,6 +55,13 @@ public class ProfileActivity extends AppCompatActivity {
 
     }
 
+
+    protected String name;
+    protected String college;
+    protected String email;
+    protected String phone;
+    protected String id = "6418b08bddfa69be902df5f3";
+
     public void loadData() {
         try {
             ExecutorService executor = Executors.newSingleThreadExecutor();
@@ -60,9 +69,9 @@ public class ProfileActivity extends AppCompatActivity {
                         try {
                             // assumes that there is a server running on the AVD's host on port 3000
                             // and that it has a /test endpoint that returns a JSON object with
-                            // a field called "message"
+                             // a field called "message"
 
-                            URL url = new URL("http://10.0.2.2:3000/profile?id=6418b0508db9ccd5d080c893");
+                            URL url = new URL("http://10.0.2.2:3000/profile?id=" + id);
 
                             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                             conn.setRequestMethod("GET");
@@ -75,8 +84,10 @@ public class ProfileActivity extends AppCompatActivity {
 
                             // need to set the instance variable in the Activity object
                             // because we cannot directly access the TextView from here
-                            Log.i("WW", jo.getString("message"));
-
+                            name = jo.getString("name");
+                            college = jo.getString("college");
+                            email = jo.getString("email");
+                            phone = jo.getString("phone");
                         }
                         catch (Exception e) {
                             e.printStackTrace();
@@ -91,12 +102,25 @@ public class ProfileActivity extends AppCompatActivity {
             executor.awaitTermination(2, TimeUnit.SECONDS);
 
             // now we can set the status in the TextView
-//            tv.setText(message);
+            tvNameInput.setText(name);
+            tvCollegeInput.setText(college);
+            tvEmailInput.setText(email);
+            tvPhoneInput.setText(phone);
         }
         catch (Exception e) {
             // uh oh
             e.printStackTrace();
-//            tv.setText(e.toString());
         }
+    }
+
+    // redirects to edit profile activity
+    public void onEditButtonClick(View v) {
+        Intent i = new Intent(this, EditProfileActivity.class);
+        i.putExtra("ID", id);
+        i.putExtra("name", name);
+        i.putExtra("college", college);
+        i.putExtra("email", email);
+        i.putExtra("phone", phone);
+        this.startActivity(i);
     }
 }
