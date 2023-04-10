@@ -1,5 +1,6 @@
 package edu.brynmawr.cmsc353.bicoreuse;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 
@@ -35,6 +36,11 @@ public class RegisterActivity extends AppCompatActivity {
         etPassword = findViewById(R.id.etPassword);
         etPasswordConfirm = findViewById(R.id.etPasswordConfirm);
         etPhone = findViewById(R.id.etPhone);
+
+        Intent intent= getIntent();
+        String email= intent.getStringExtra("email");
+
+        etEmail.setText(email);
 
         ActionBar actionBar= getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);

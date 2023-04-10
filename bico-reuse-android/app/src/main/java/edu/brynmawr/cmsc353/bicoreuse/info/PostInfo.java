@@ -2,8 +2,6 @@ package edu.brynmawr.cmsc353.bicoreuse.info;
 
 import android.util.Log;
 
-import androidx.databinding.BaseObservable;
-import androidx.databinding.Bindable;
 
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -12,8 +10,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.text.DateFormat;
-import java.util.Date;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
@@ -28,7 +24,6 @@ public class PostInfo {
     private String date;
     private String status;
     private UserInfo seller;
-
     private boolean success;
 
     public PostInfo(String id) {

@@ -66,10 +66,10 @@ public class LoginActivity extends AppCompatActivity {
                         "Successfully logged in!",
                         Toast.LENGTH_LONG).show();
 
-                // Intent i= new Intent(this, placeholder);
-                // i.putExtra("userId", loginInfo.getUserId());
+                //Intent i= new Intent(this, HomepageActivity.class);
+                //i.putExtra("userId", loginInfo.getUserId());
 
-                // this.startActivity(i);
+                //this.startActivity(i);
 
             } else {
                 Toast.makeText(getApplicationContext(),
