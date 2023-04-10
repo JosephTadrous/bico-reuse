@@ -80,6 +80,8 @@ public class EditPostActivity extends AppCompatActivity {
 
         CancelEditButton = findViewById(R.id.CancelEditButton);
         SubmitEditButton = findViewById(R.id.SubmitEditButton);
+        loadData();
+        
         SubmitEditButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
