@@ -109,4 +109,8 @@ public class LoginInfo {
     public UserInfo getUserInfo() {
         return userInfo;
     }
+
+    public String getUserId() {
+        return userInfo.getId();
+    }
 }

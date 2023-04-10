@@ -3,9 +3,10 @@ package edu.brynmawr.cmsc353.bicoreuse;
 import android.os.Bundle;
 
 
-
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -34,6 +35,9 @@ public class RegisterActivity extends AppCompatActivity {
         etPassword = findViewById(R.id.etPassword);
         etPasswordConfirm = findViewById(R.id.etPasswordConfirm);
         etPhone = findViewById(R.id.etPhone);
+
+        ActionBar actionBar= getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
     }
 
 
@@ -45,6 +49,16 @@ public class RegisterActivity extends AppCompatActivity {
 
     public void onCancelButtonClick(View v) {
         this.finish();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch(item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     public void onRegisterButtonClick(View v) {

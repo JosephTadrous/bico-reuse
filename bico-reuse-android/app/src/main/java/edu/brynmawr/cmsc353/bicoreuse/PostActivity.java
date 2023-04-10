@@ -1,13 +1,16 @@
 package edu.brynmawr.cmsc353.bicoreuse;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toolbar;
 
 import edu.brynmawr.cmsc353.bicoreuse.info.PostInfo;
 import edu.brynmawr.cmsc353.bicoreuse.info.UserInfo;
@@ -36,7 +39,8 @@ public class PostActivity extends AppCompatActivity {
         Intent intent= getIntent();
         String postId= intent.getStringExtra("postId");
         String curUserId= intent.getStringExtra("curUserId");
-        curUser= new UserInfo("6418b08bddfa69be902df5f3");
+        //curUser= new UserInfo("6418b08bddfa69be902df5f3");
+        curUser= new UserInfo("64186a1d476ee3e3a7151640");
         postInfo= new PostInfo("6418b08bddfa69be902df5f4");
 
 
@@ -65,7 +69,19 @@ public class PostActivity extends AppCompatActivity {
             btnDelete.setVisibility(View.GONE);
             btnEdit.setVisibility(View.GONE);
         }
+        ActionBar actionBar= getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
 
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch(item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     public void onDeleteButtonClick(View v) {
