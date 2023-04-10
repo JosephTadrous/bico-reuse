@@ -2,11 +2,13 @@ package edu.brynmawr.cmsc353.bicoreuse;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,6 +27,8 @@ import java.util.concurrent.TimeUnit;
 
 public class EditPostActivity extends AppCompatActivity {
 
+    public static final int COUNTER_ACTIVITY_ID_1 = 1;
+    public static final int COUNTER_ACTIVITY_ID_2 = 2;
     private View ivSolidEdit;
     private TextView PostEdit;
     private TextView TitleEdit;
@@ -69,6 +73,24 @@ public class EditPostActivity extends AppCompatActivity {
         });
     }
 
+//    public void onSubmitButtonClick(View v) {
+//        // create an Intent object and pass to QuizActivity
+//        Intent i = new Intent(this, HomePageActivity.class);
+//        startActivityForResult(i, COUNTER_ACTIVITY_ID_1); // launch activity
+//    }
+
+    public void onCancelButtonClick(View v) {
+        this.finish();
+        // create an Intent object and pass to QuizActivity
+        Intent i = new Intent(this, HomePageActivity.class);
+//        Spinner spinner = (Spinner) findViewById(R.id.difficulty_level_spinner);
+//        // obtain the difficulty level from the spinner
+//        String difficultyLevel = spinner.getSelectedItem().toString();
+        // pass the difficulty level to the Quiz Activity using key/value pairs in the Intent
+//        i.putExtra("MESSAGE", difficultyLevel);
+        startActivityForResult(i, COUNTER_ACTIVITY_ID_2); // launch activity
+    }
+
     private void submitEditedPost() {
         try {
             ExecutorService executor = Executors.newSingleThreadExecutor();
@@ -85,7 +107,7 @@ public class EditPostActivity extends AppCompatActivity {
                             conn.setDoOutput(true);
 
                             Map<String, String> requestData = new HashMap<>();
-                            requestData.put("id", "6418b08bddfa69be902df5f4");
+                            requestData.put("id", "6420f2a2cf9b80e0e28afb18");
                             requestData.put("title", TitleInputEdit.getText().toString());
                             requestData.put("description", DescriptionInputEdit.getText().toString());
                             requestData.put("price", PriceInputEdit.getText().toString());
@@ -122,6 +144,8 @@ public class EditPostActivity extends AppCompatActivity {
             // uh oh
             e.printStackTrace();
         }
+
+        this.finish();
     }
 
     // format data to be sent in the request body

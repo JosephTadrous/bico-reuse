@@ -16,20 +16,34 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class MainActivity extends AppCompatActivity {
+public class HomePageActivity extends AppCompatActivity {
+    RecycleViewAdapter adapter;
+    RecyclerView recyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_homepage);
+        JSONArray dataArray = connectToServer();
+        recyclerView = (RecyclerView)findViewById(R.id.recyclerView);
+        adapter = new RecycleViewAdapter(dataArray, getApplication());
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(HomePageActivity.this));
+
+    }
+
+    public void onBackPressed() {
+        super.onBackPressed();
     }
 
     protected String message;
 
-    public void connectToServer(View v) {
+    public JSONArray connectToServer() {
         TextView tv = findViewById(R.id.statusField);
+        JSONArray data = new JSONArray();
         try {
             ExecutorService executor = Executors.newSingleThreadExecutor();
             executor.execute( () -> {
@@ -51,10 +65,10 @@ public class MainActivity extends AppCompatActivity {
 
                             for (int i = 0; i < dataArray.length(); i++) {
                                 JSONObject jo = dataArray.getJSONObject(i);
+                                data.put(jo);
+                                System.out.println("");
                                 String title = jo.get("title").toString();
-
                                 message = jo.get("title").toString();
-                                setContentView(R.layout.activity_main);
                             }
 
                         }
@@ -72,11 +86,11 @@ public class MainActivity extends AppCompatActivity {
 
             // now we can set the status in the TextView
             tv.setText(message);
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             // uh oh
             e.printStackTrace();
-            tv.setText(e.toString());
+//            tv.setText(e.toString());
         }
+        return data;
     }
 }
