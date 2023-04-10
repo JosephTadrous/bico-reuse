@@ -29,7 +29,7 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<PostViewHolder> {
 
         // Inflate the layout
 
-        View photoView = inflater.inflate(R.layout.activity_post, parent, false);
+        View photoView = inflater.inflate(R.layout.activity_individual_post_on_homepage, parent, false);
 
         PostViewHolder viewHolder = new PostViewHolder(photoView);
         return viewHolder;
@@ -40,7 +40,7 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<PostViewHolder> {
     onBindViewHolder(final PostViewHolder viewHolder, final int position) {
 //        final v = viewHolder.getAdapterPosition();
         try {
-            viewHolder.sellerName.setText(dataArray.getJSONObject(position).get("seller").get("name"));
+            // viewHolder.sellerName.setText(dataArray.getJSONObject(position).get("seller").toString());
             viewHolder.date.setText(dataArray.getJSONObject(position).get("date").toString());
             viewHolder.title.setText(dataArray.getJSONObject(position).get("title").toString());
             // viewHolder.description.setText(dataArray.getJSONObject(position).get("description").toString());
