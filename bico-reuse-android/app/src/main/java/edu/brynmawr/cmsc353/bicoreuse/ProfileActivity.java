@@ -33,6 +33,8 @@ public class ProfileActivity extends AppCompatActivity {
     private TextView tvPhoneInput;
     private TextView tvPostsHistory;
     private Button btnEdit;
+    protected String id;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +53,12 @@ public class ProfileActivity extends AppCompatActivity {
         tvPhoneInput = findViewById(R.id.tvPhoneInput);
         tvPostsHistory = findViewById(R.id.tvPostsHistory);
 
+        Intent intent = getIntent();
+        id = intent.getStringExtra("id");
+        Log.i("AAAA", id);
+
         loadData();
+
 
     }
 
@@ -60,7 +67,6 @@ public class ProfileActivity extends AppCompatActivity {
     protected String college;
     protected String email;
     protected String phone;
-    protected String id = "6418b08bddfa69be902df5f3";
 
     public void loadData() {
         try {

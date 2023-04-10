@@ -1,9 +1,13 @@
 package edu.brynmawr.cmsc353.bicoreuse;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
@@ -40,7 +44,28 @@ public class HomePageActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(HomePageActivity.this));
 
+        ActionBar actionBar = getSupportActionBar();
+    }
 
+    // method to inflate the options menu when
+    // the user opens the menu for the first time
+    @Override
+    public boolean onCreateOptionsMenu( Menu menu ) {
+
+        getMenuInflater().inflate(R.menu.main, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected( @NonNull MenuItem item ) {
+
+        switch (item.getItemId()){
+            case R.id.profile:
+                Intent i = new Intent(this, ProfileActivity.class);
+                i.putExtra("id", userId);
+                startActivity(i);
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     public void onCreateButtonClick(View v) {
