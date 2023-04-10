@@ -70,7 +70,6 @@ public class LoginInfo {
                         // this will now be set as our current user
                         userInfo= new UserInfo(id, name, college, email, phone);
 
-
                     } else {
                         // Handle error response from server
                     }
@@ -109,5 +108,9 @@ public class LoginInfo {
 
     public UserInfo getUserInfo() {
         return userInfo;
+    }
+
+    public String getUserId() {
+        return userInfo.getId();
     }
 }

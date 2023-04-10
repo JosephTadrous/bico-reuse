@@ -23,7 +23,7 @@ public class RegistrationInfo {
     private String password;
     private String phone;
 
-    private boolean success= false;
+    private boolean success;
 
     public RegistrationInfo(String name, String college, String email, String password, String phone) {
         this.name= name;
@@ -31,6 +31,9 @@ public class RegistrationInfo {
         this.email= email;
         this.password= password;
         this.phone= phone;
+
+
+        this.success= false;
     }
 
     public void submitData() {
@@ -59,6 +62,7 @@ public class RegistrationInfo {
 
 
                             int responseCode = conn.getResponseCode();
+
                             if (responseCode == HttpURLConnection.HTTP_OK) {
                                 success= true;
                             } else {
