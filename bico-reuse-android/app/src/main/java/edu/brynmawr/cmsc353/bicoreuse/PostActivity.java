@@ -9,6 +9,17 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
+
 import edu.brynmawr.cmsc353.bicoreuse.info.PostInfo;
 import edu.brynmawr.cmsc353.bicoreuse.info.UserInfo;
 
@@ -69,7 +80,63 @@ public class PostActivity extends AppCompatActivity {
     }
 
     public void onDeleteButtonClick(View v) {
+        try {
+            ExecutorService executor = Executors.newSingleThreadExecutor();
+            executor.execute( () -> {
+                        try {
+                            // assumes that there is a server running on the AVD's host on port 3000
+                            // and that it has a /test endpoint that returns a JSON object with
+                            // a field called "message"
 
+                            URL url = new URL("http://10.0.2.2:3000/delete_post");
+
+                            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                            conn.setRequestMethod("POST"); // POST request
+                            conn.setDoOutput(true);
+
+                            Map<String, String> requestData = new HashMap<>();
+                            requestData.put("id", "6418b08bddfa69be902df5f4");
+                            DataOutputStream out = new DataOutputStream(conn.getOutputStream());
+                            out.writeBytes(getUrlEncodedData(requestData));
+                            out.flush();
+                            out.close();
+
+
+                            int responseCode = conn.getResponseCode();
+                            if (responseCode == HttpURLConnection.HTTP_OK) {
+                                InputStream in = conn.getInputStream();
+                            } else {
+                                // Handle error response from server
+                            }
+                        }
+                        catch (Exception e) {
+                            Log.i("ERR", e.getMessage());
+                            e.printStackTrace();
+                        }
+                    }
+            );
+
+            // this waits for up to 2 seconds
+            // it's a bit of a hack because it's not truly asynchronous
+            // but it should be okay for our purposes (and is a lot easier)
+            executor.awaitTermination(2, TimeUnit.SECONDS);
+
+        }
+        catch (Exception e) {
+            // uh oh
+            e.printStackTrace();
+        }
+    }
+
+    private String getUrlEncodedData(Map<String, String> data) throws IOException {
+        StringBuilder builder = new StringBuilder();
+        for (String key : data.keySet()) {
+            if (builder.length() > 0) {
+                builder.append("&");
+            }
+            builder.append(key).append("=").append(data.get(key));
+        }
+        return builder.toString();
     }
 
     public void onEditButtonClick(View v) {
