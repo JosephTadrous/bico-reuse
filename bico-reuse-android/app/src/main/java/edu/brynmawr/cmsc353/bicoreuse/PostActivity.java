@@ -40,57 +40,16 @@ public class PostActivity extends AppCompatActivity {
     private UserInfo curUser;
     private PostInfo postInfo= null;
 
+    private String postId;
+    private String userId;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post);
 
 
-        Intent intent= getIntent();
-        String postId= intent.getStringExtra("postId");
-        String curUserId= intent.getStringExtra("userId");
-        curUser= new UserInfo(curUserId);
-        postInfo= new PostInfo(postId);
 
-
-
-        tvTitle= findViewById(R.id.tvTitle);
-        tvSeller= findViewById(R.id.tvSeller);
-        tvDate= findViewById(R.id.tvDate);
-        tvDescription= findViewById(R.id.tvDescription);
-        tvEmail= findViewById(R.id.tvEmail);
-        tvPhone= findViewById(R.id.tvPhone);
-        btnDelete= findViewById(R.id.btnDelete);
-        btnEdit= findViewById(R.id.btnEdit);
-
-        tvTitle.setText(String.format("%s - $%.2f", postInfo.getTitle(), postInfo.getPrice()));
-        tvSeller.setText(String.format("Seller: %s", postInfo.getSeller().getName()));
-        tvEmail.setText(String.format("Email: %s", postInfo.getSeller().getEmail()));
-        tvPhone.setText(String.format("Phone: %s", postInfo.getSeller().getPhone()));
-        tvDate.setText(String.format("Posted: %s", postInfo.getDate()));
-        tvDescription.setText(postInfo.getDescription());
-
-        // set button visibilities if the user == seller
-        if (postInfo.getSeller().getId().equals(curUser.getId())) {
-            btnDelete.setVisibility(View.VISIBLE);
-            btnEdit.setVisibility(View.VISIBLE);
-        } else {
-            btnDelete.setVisibility(View.GONE);
-            btnEdit.setVisibility(View.GONE);
-        }
-        ActionBar actionBar= getSupportActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
-
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch(item.getItemId()) {
-            case android.R.id.home:
-                onBackPressed();
-                return true;
-        }
-        return super.onOptionsItemSelected(item);
     }
 
     public void onDeleteButtonClick(View v) {
@@ -109,7 +68,7 @@ public class PostActivity extends AppCompatActivity {
                             conn.setDoOutput(true);
 
                             Map<String, String> requestData = new HashMap<>();
-                            requestData.put("id", "6418b08bddfa69be902df5f4");
+                            requestData.put("id", postId);
                             DataOutputStream out = new DataOutputStream(conn.getOutputStream());
                             out.writeBytes(getUrlEncodedData(requestData));
                             out.flush();
@@ -157,8 +116,52 @@ public class PostActivity extends AppCompatActivity {
     }
 
     public void onEditButtonClick(View v) {
-
+        Intent i= new Intent(this, EditPostActivity.class);
+        i.putExtra("postId", postId);
+        i.putExtra("title", postInfo.getTitle());
+        i.putExtra("description", postInfo.getDescription());
+        i.putExtra("price", postInfo.getPrice().toString());
+        i.putExtra("status", postInfo.getStatus());
+        this.startActivity(i);
     }
 
+    @Override
+    public void onResume(){
+        super.onResume();
+
+        Intent intent= getIntent();
+        postId= intent.getStringExtra("postId");
+        userId= intent.getStringExtra("userId");
+
+        curUser= new UserInfo(userId);
+        postInfo= new PostInfo(postId);
+
+        tvTitle= findViewById(R.id.tvTitle);
+        tvSeller= findViewById(R.id.tvSeller);
+        tvDate= findViewById(R.id.tvDate);
+        tvDescription= findViewById(R.id.tvDescription);
+        tvEmail= findViewById(R.id.tvEmail);
+        tvPhone= findViewById(R.id.tvPhone);
+        btnDelete= findViewById(R.id.btnDelete);
+        btnEdit= findViewById(R.id.btnEdit);
+
+        tvTitle.setText(String.format("%s - $%.2f", postInfo.getTitle(), postInfo.getPrice()));
+        tvSeller.setText(String.format("Seller: %s", postInfo.getSeller().getName()));
+        tvEmail.setText(String.format("Email: %s", postInfo.getSeller().getEmail()));
+        tvPhone.setText(String.format("Phone: %s", postInfo.getSeller().getPhone()));
+        tvDate.setText(String.format("Posted: %s", postInfo.getDate()));
+        tvDescription.setText(postInfo.getDescription());
+
+        // set button visibilities if the user == seller
+        if (postInfo.getSeller().getId().equals(curUser.getId())) {
+            btnDelete.setVisibility(View.VISIBLE);
+            btnEdit.setVisibility(View.VISIBLE);
+        } else {
+            btnDelete.setVisibility(View.GONE);
+            btnEdit.setVisibility(View.GONE);
+        }
+
+
+    }
 
 }

@@ -38,13 +38,7 @@ public class HomePageActivity extends AppCompatActivity {
 
         userId= intent.getStringExtra("userId");
         
-        JSONArray dataArray = connectToServer();
-        recyclerView = (RecyclerView)findViewById(R.id.recyclerView);
-        adapter = new RecycleViewAdapter(dataArray, getApplication(), this.userId);
-        recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(HomePageActivity.this));
 
-        ActionBar actionBar = getSupportActionBar();
     }
 
     // method to inflate the options menu when
@@ -78,6 +72,7 @@ public class HomePageActivity extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
     }
+
 
     protected String message;
 
@@ -132,5 +127,17 @@ public class HomePageActivity extends AppCompatActivity {
 //            tv.setText(e.toString());
         }
         return data;
+    }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+        JSONArray dataArray = connectToServer();
+        recyclerView = (RecyclerView)findViewById(R.id.recyclerView);
+        adapter = new RecycleViewAdapter(dataArray, getApplication(), this.userId);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(HomePageActivity.this));
+
+        ActionBar actionBar = getSupportActionBar();
     }
 }

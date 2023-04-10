@@ -55,9 +55,8 @@ public class ProfileActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         id = intent.getStringExtra("id");
-        Log.i("AAAA", id);
 
-        loadData();
+        //loadData();
 
 
     }
@@ -117,6 +116,12 @@ public class ProfileActivity extends AppCompatActivity {
             // uh oh
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+        this.loadData();
     }
 
     // redirects to edit profile activity
