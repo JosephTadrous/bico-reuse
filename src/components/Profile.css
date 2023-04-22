@@ -18,7 +18,7 @@
 }
 
 
-.DeleteButton {
+.DeleteButton, .CancelButton {
     font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
     font-size: 24px;
     background-color: var(--cinnabar);
@@ -28,7 +28,7 @@
 
 .EditForm {
     color: var(--fern);
-    font-size: 25px;
+    font-size: 24px;
     margin: 20px;
 		display: flex;
 		flex-direction: column;
@@ -44,7 +44,7 @@
 
 
 .EditForm input {
-    font-size: 20px;
+    font-size: 24px;
     margin: 10px;
 }
 
@@ -52,4 +52,6 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
+    margin-top: 32px;
+    padding-bottom: 24px;
 }

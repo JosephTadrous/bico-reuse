@@ -47,11 +47,12 @@ export default function Post({post}) {
 					</div>
 					<p className="Description">{post.description}</p>
 					<form action="http://localhost:3000/delete_post" method="post">
-					<input type="hidden" name="id" value= {post._id} />
-					<button className="DeleteButton">Delete</button>
-					<NavLink className="CreateEditButton" to={'/editPost/' + post._id} state={{post: post}}>
-						<button className="EditButton">Edit</button>
-					</NavLink>	
+						<input type="hidden" name="id" value= {post._id} />
+						<input type="hidden" name="user_id" value= {post.seller._id} />
+						<button className="DeleteButton">Delete</button>
+						<NavLink className="CreateEditButton" to={'/editPost/' + post._id} state={{post: post}}>
+							<button className="EditButton">Edit</button>
+						</NavLink>	
 					</form>
 			</div>
 		}

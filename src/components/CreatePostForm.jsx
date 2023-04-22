@@ -18,7 +18,7 @@ export default function CreatePostForm({post}) {
         Price: <input name="price"/> <p> </p>
         Image: <input name="photo"/> <p> </p>
 				<div className="Buttons">
-					<button onClick={clickHandler} className="EditButton" type="submit">Cancel</button>
+					<button onClick={clickHandler} className="CancelButton" type="submit">Cancel</button>
 					<input className="EditButton" type="submit" value="Submit form!" href="http://localhost:5173"/>
 				</div>
         </form>

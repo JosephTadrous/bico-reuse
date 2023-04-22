@@ -7,7 +7,7 @@ import "./Profile.css"
 
 
 export default function Profile() {
-	const [user, setUser] = useState([]);
+	const [user, setUser] = useState(null);
 
 	const location= useLocation();
 	const { state }= location;
@@ -31,6 +31,9 @@ export default function Profile() {
 			<div className="Buttons">
 				<form action="http://localhost:3000/delete_user" method="post">
 					<input type="hidden" name="id" value={user._id} />
+					<input type="hidden" name="user_posts" 
+						value={ user.history.map((post) => post._id) } 
+					/>
 					<button className= "DeleteButton">Delete User</button>
 				</form>
 				<NavLink

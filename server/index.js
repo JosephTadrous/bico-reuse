@@ -262,12 +262,43 @@ app.use("/delete_post", (req, res) => {
 	// delete a post for sales 
 	// to use the API, send a request to /delete_post?id=[your_post_id]
 	post_id = req.body.id; 
+	user_id = req.body.user_id;
+
+	
 	console.log(post_id); 
 	console.log("Deleting post " + post_id); 
 	Post.deleteOne({ '_id': post_id }).then((response) =>  {res.redirect("http://localhost:5173/")}, 
 	(error) => {
 		res.status(500).send("Something went wrong"); 
 	}); 
+
+
+});
+
+app.use('/delete_user', (req, res) => {
+	user_id= req.body.id;
+	user_posts= req.body.user_posts;
+
+	// check that if a single element is sent, we still put it in an array form
+	if (!Array.isArray(user_posts)) {
+		user_posts= [user_posts]
+	}
+	
+	User.deleteOne({'_id': user_id})
+	.then((response) => { console.log("Successfully deleted " + user_id)},
+	(error) => {
+		res.status(500).send("Something went wrong with deleting user");
+	});
+	
+
+	
+	Post.deleteMany({'_id': {$in: user_posts}})
+	.then((response) => { console.log("Deleted " + user_posts); 
+		res.redirect("http://localhost:5173/"); },
+				(error) => {
+					res.status(500).send("Something went wrong with deleting user");
+	});
+	
 });
 
 
@@ -330,6 +361,7 @@ app.use("/create_user", (req, res) => {
 		res.status(500).send("Something went wrong"); 
 	});
 });
+
 
 
 
