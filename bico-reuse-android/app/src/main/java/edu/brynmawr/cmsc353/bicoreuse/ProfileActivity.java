@@ -34,6 +34,7 @@ public class ProfileActivity extends AppCompatActivity {
     private TextView tvPostsHistory;
     private Button btnEdit;
     protected String id;
+    protected String curUserId;
 
 
     @Override
@@ -52,9 +53,11 @@ public class ProfileActivity extends AppCompatActivity {
         tvPhone = findViewById(R.id.tvPhone);
         tvPhoneInput = findViewById(R.id.tvPhoneInput);
         tvPostsHistory = findViewById(R.id.tvPostsHistory);
+        btnEdit = findViewById(R.id.btnEdit);
 
         Intent intent = getIntent();
         id = intent.getStringExtra("id");
+        curUserId = intent.getStringExtra("curUserId");
 
         //loadData();
 
@@ -122,6 +125,12 @@ public class ProfileActivity extends AppCompatActivity {
     public void onResume(){
         super.onResume();
         this.loadData();
+        // set button visibilities if the user == seller
+        if (id.equals(curUserId)) {
+            btnEdit.setVisibility(View.VISIBLE);
+        } else {
+            btnEdit.setVisibility(View.GONE);
+        }
     }
 
     // redirects to edit profile activity

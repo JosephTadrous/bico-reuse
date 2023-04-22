@@ -29,7 +29,9 @@
                 android:background="@color/primary"
                 android:fontFamily="@font/poppins_semibold"
                 android:textColor="#F0F0F0"
-                android:textSize="14sp" />
+                android:textSize="14sp"
+                android:onClick="viewSellerInformation"
+                android:clickable="true"/>
 
             <TextView
                 android:id="@+id/tvEmail"

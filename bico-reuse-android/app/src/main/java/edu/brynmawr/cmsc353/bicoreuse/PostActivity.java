@@ -115,6 +115,14 @@ public class PostActivity extends AppCompatActivity {
         return builder.toString();
     }
 
+    public void viewSellerInformation(View v) {
+        Intent i = new Intent(this, ProfileActivity.class);
+        i.putExtra("id", postInfo.getSeller().getId());
+        i.putExtra("curUserId", curUser.getId());
+
+        startActivity(i);
+    }
+
     public void onEditButtonClick(View v) {
         Intent i= new Intent(this, EditPostActivity.class);
         i.putExtra("postId", postId);
