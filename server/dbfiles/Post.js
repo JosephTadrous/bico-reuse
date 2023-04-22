@@ -17,7 +17,8 @@ let postSchema= new Schema({
   description: String,
   price: Number,
   photos: [String],
-  status: String
+  status: String, 
+  approved: { type: Schema.Types.Boolean, default: false} 
 });
 
 module.exports= mongoose.model('Post', postSchema);

@@ -94,26 +94,33 @@ app.use("/all", (req, res) => {
 		(post) => {
 			if (post) {
 				if (Array.isArray(post)) {
-					post.forEach( (p) => {
-						// res.write('<li>');
-						res.write('Name: ' + p.seller + '\n');  // double check 
-						res.write('Title: ' + p.title + '\n');
-						res.write('Date: ' + p.date + '\n'); 
-						res.write('Description: ' + p.description + '\n');
-						res.write('Price: ' + p.price + '\n');
-						res.write('Photos: ' + p.photos + '\n'); 
-						res.write('Status: ' + p.status + '\n\n\n');
-						res.write('</li>');
-					});
+					res.json(post); 
 				} else { // only one post exists
-					var p = post[0];
-					res.write('Name: ' + p.seller + '\n'); 
-					res.write('Title: ' + p.title + '\n');
-					res.write('Date: ' + p.date + '\n'); 
-					res.write('Description: ' + p.description + '\n');
-					res.write('Price: ' + p.price + '\n');
-					res.write('Photos: ' + p.photos + '\n'); 
-					res.write('Status: ' + p.status + '\n\n\n');
+					
+				}
+			} else { // undefined
+				res.json([]);
+			}
+		}, // failure
+		(error) => {
+			res.status(500).send('Something went wrong');
+	});
+});
+
+// endpoint for viewing a list of items already approved for sale
+app.use("/all_approved", (req, res) => {
+	// get all documents
+	var filter = {'approved': true};
+	Post.find(filter)
+	.populate('seller')
+	.then(
+		// success
+		(post) => {
+			if (post) {
+				if (Array.isArray(post)) {
+					res.json(post);
+				} else { // only one post exists
+					res.json([post]);
 				}
 			} else { // undefined
 				res.json([]);
@@ -141,6 +148,38 @@ app.use("/edit_post", (req, res) => {
 	var filter = {'_id' : postId};
 	// 
 	var action = { '$set' : { 'title' :  newTitle, 'description': newDesc, 'price': newPrice, 'image': [newPhotos], 'status': newStatus} };
+
+	let updatedPost = Post.findOneAndUpdate(filter, action)
+	.then(
+		(oldPost) => {
+			if (!oldPost) {
+				// console.log("FAILURE");
+				res.json({'status' : 'no post found'});
+			} else {
+				// res.json({'status' : 'updated the post'});
+				// console.log("SUCCESS!");
+				res.redirect('http://localhost:5173/');
+			}
+		},
+		(error) => {
+			// if an error occurs 
+			// console.log("ERROR");
+			res.status(500).send(error);
+		}
+	);
+});
+
+app.use("/approve_post", (req, res) => {
+	// if (!req.body.id) {
+	// 	// if post id is missing
+    //     res.json( { 'status' : 'missing Data' });
+	// }
+
+	var postId = req.body.id; 
+
+	var filter = {'_id' : postId};
+	// 
+	var action = { '$set' : { 'approved' :  true} };
 
 	let updatedPost = Post.findOneAndUpdate(filter, action)
 	.then(
