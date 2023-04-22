@@ -65,6 +65,27 @@ app.get("/api", (req, res) => {
 	});
 });
 
+app.get("/users", (req, res) => {
+	User.find()
+	.populate('history')
+	.populate('bookmarked')
+	.then(
+		// success
+		(user) => {
+			if (user) {
+				if (Array.isArray(user)) {
+					res.json(user);
+				} else {
+					res.json([user]);
+				}
+			} else {
+				res.json([]);
+			}
+		},
+		(error) => {
+			res.status(500).send('Something went wrong');
+		});
+});
 
 app.use("/update", (req, res) => {
 	var filter = { '_id' : req.query.id };
@@ -280,6 +301,13 @@ app.use("/create_user", (req, res) => {
 	reqPhone= req.body.phone;
 	reqCollege= req.body.college;
 	reqPass= req.body.password;
+
+	User.countDocuments({email: reqEmail}, (err, count) => {
+			if (count > 0) {
+				res.status(400).send("email already exists");
+			}
+		}
+	);
 
 	let newUser= new User({
 		_id: new mongoose.Types.ObjectId(),

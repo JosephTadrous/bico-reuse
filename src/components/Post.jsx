@@ -22,7 +22,13 @@ export default function Post({post}) {
 						</div>
 
 						<div className="SellerInfo">
-							<h5>Seller: {post.seller.name}</h5>
+								<h5>Seller: 
+									<NavLink
+										to={'/profile'}
+										state={{userId: post.seller._id}}>
+										{" " + 	post.seller.name}
+									</NavLink>	
+								</h5>
 							<h5>Email:  {post.seller.email}</h5>
 							<h5>Phone:  {post.seller.phone}</h5>
 						</div>

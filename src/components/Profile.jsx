@@ -11,8 +11,8 @@ export default function Profile() {
 
 	const location= useLocation();
 	const { state }= location;
-	const userId = state.sellerId;
-
+	const userId = state.userId;
+	
 	useEffect( () => {
 		console.log(userId);
 		fetch('http://localhost:3000/profile?id=' + userId) // TODO: dynamic id

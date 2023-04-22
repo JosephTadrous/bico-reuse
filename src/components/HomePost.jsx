@@ -15,7 +15,7 @@ export default function HomePost({post}) {
 			
 			<NavLink 
 				to={'/profile'}
-				state={{sellerId: post.seller._id}}>
+				state={{userId: post.seller._id}}>
 				<h3>{post.seller.name}</h3>
 			</NavLink>
 		</div>
