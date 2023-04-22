@@ -24,7 +24,7 @@ export default function Home() {
 		.then((posts) => {
 			setPosts(posts);
 		});
-	});
+	}, []);
 
 	return (
 		<div className="HomePage">

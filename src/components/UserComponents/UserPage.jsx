@@ -1,6 +1,7 @@
 import React from 'react';
 import {useState, useEffect } from 'react';
 import UserList from './UserList';
+import './UserPage.css';
 
 export default function UserPage() {
   const [users, setUsers]= useState([]);
@@ -11,9 +12,13 @@ export default function UserPage() {
 		.then((users) => {
 			setUsers(users);
 		});
-	});
+	}, []);
 
   return (
-    <UserList users={users} />
+		
+    <div className="UserPage">
+			<h1>Users</h1>
+			<UserList users={users} />
+		</div>
   )
 }

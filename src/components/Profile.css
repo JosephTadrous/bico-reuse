@@ -17,6 +17,15 @@
 		padding: 8px;
 }
 
+
+.DeleteButton {
+    font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+    font-size: 24px;
+    background-color: var(--cinnabar);
+    margin: 10px;
+		padding: 8px;
+}
+
 .EditForm {
     color: var(--fern);
     font-size: 25px;

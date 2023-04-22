@@ -48,7 +48,7 @@ export default function Post({post}) {
 					<p className="Description">{post.description}</p>
 					<form action="http://localhost:3000/delete_post" method="post">
 					<input type="hidden" name="id" value= {post._id} />
-					<button className="EditButton"> Delete</button>
+					<button className="DeleteButton">Delete</button>
 					<NavLink className="CreateEditButton" to={'/editPost/' + post._id} state={{post: post}}>
 						<button className="EditButton">Edit</button>
 					</NavLink>	
