@@ -11,7 +11,7 @@ export default function CreatePostForm({post}) {
 
 	return (
 		<div className="EditForm"> 
-        <form action="http://localhost:3000/create_post" method="post" onsubmit='return false'>
+        <form action="http://localhost:3000/create_post" method="post">
         User ID: <input name="user_id"/> <p> </p>
         Title: <input name="title"/>  <p> </p>
         Description: <input name="description"/> <p> </p>

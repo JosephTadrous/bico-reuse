@@ -1,3 +1,4 @@
+
 let express= require('express');
 let app= express();
 let cors= require('cors');
@@ -6,6 +7,8 @@ var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: true }));
 
+// set up date imports
+let date_fns= require('date-fns');
 
 // set up BodyParser
 var bodyParser = require('body-parser');
@@ -15,6 +18,7 @@ app.use(cors());
 
 let User= require('./dbfiles/User.js');
 let Post= require('./dbfiles/Post.js');
+let Info= require('./dbfiles/Info.js');
 
 
 app.use("/profile", (req, res) => {
@@ -310,7 +314,8 @@ app.post("/login_user", (req, res) => {
 
 		User.findOne(filter)
 		.populate('history')
-		.populate('bookmarked').then(
+		.populate('bookmarked')
+		.then(
 			(user) => {
 				if (user.validatePassword(reqPass)) {
 					res.json(user);
@@ -362,8 +367,43 @@ app.use("/create_user", (req, res) => {
 	});
 });
 
+// gets the number of posts 
+app.use('/last_week', (req, res) => {
 
+	let today= new Date();
 
+	promises= [];
+
+	let daysInMS= 24 * 60 * 60 * 1000;
+
+	for (let i= 7; i >= 0; i--) {
+		let startDay= date_fns.startOfDay(today - i * daysInMS);
+		let endDay= date_fns.endOfDay(today - i * daysInMS);
+		
+		filter= { 'date': {$gte: startDay,
+										 $lte: endDay} };
+		promises.push(Post.countDocuments(filter));
+	}
+
+	Promise.all(promises)
+	.then( (counts) => {
+		res.json(counts);
+	})
+	.catch((error) => {
+		console.log(error);
+	});
+});
+
+app.use('/items_sold', (req, res) => {
+	Info.findById(0)
+	.then( (info) =>
+		res.json(info.items_sold)
+	)
+	.catch( (error) =>
+		console.log(error)
+	);
+
+});
 
 app.listen(3000, () => {
 	console.log('Listening on port 3000');
