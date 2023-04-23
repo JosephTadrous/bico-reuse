@@ -1,6 +1,7 @@
 import React from 'react';
 import {useNavigate} from 'react-router-dom';
 import './CreatePostForm.css';
+import { useState, useEffect } from 'react';
 
 
 export default function CreatePostForm({post}) {

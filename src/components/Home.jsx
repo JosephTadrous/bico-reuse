@@ -11,6 +11,7 @@ import CreatePostForm from './CreatePostForm';
 import EditProfileForm from './EditProfileForm';
 import Profile from './Profile';
 import PostUpdateForm from './PostUpdateForm';
+import Dashboard from './Dashboard';
 
 import UserPage from './UserComponents/UserPage';
 
@@ -37,6 +38,7 @@ export default function Home() {
 				<Route exact path='/create' element={ <CreatePostForm /> }></Route>
 				<Route exact path='/editProfile' element={<EditProfileForm /> }></Route>
 				<Route exact path='/editPost/:id' element={<PostUpdateForm />}></Route>
+				<Route exact path='/dashboard/' element={<Dashboard />}></Route>
 			</Routes>
 		</div>
 	)
