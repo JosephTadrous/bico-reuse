@@ -59,6 +59,8 @@ public class HomePageActivity extends AppCompatActivity {
                 Intent i = new Intent(this, ProfileActivity.class);
                 i.putExtra("id", userId);
                 startActivity(i);
+            case R.id.logOut:
+                this.finish();
         }
         return super.onOptionsItemSelected(item);
     }

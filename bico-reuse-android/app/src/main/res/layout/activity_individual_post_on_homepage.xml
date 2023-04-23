@@ -47,13 +47,6 @@
             android:textColor="#212121"
             android:textSize="16sp" />
 
-        <ImageView
-            android:id="@+id/Image"
-            android:layout_width="fill_parent"
-            android:layout_height="300dp"
-            android:background="@color/primary"
-            android:paddingStart="12dp"
-            android:paddingTop="20dp" />
         <!--            android:layout_width="fill_parent"-->
         <!--            android:layout_height="300dp"-->
         <!--            <TextView-->
@@ -68,7 +61,13 @@
         <!--                android:textSize="16sp" />-->
 
 
-
+        <ImageView
+            android:id="@+id/Image"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:background="@color/primary"
+            android:paddingStart="10dp"
+            android:paddingTop="20dp" />
 
         <TextView
             android:id="@+id/border2"

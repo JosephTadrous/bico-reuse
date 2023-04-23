@@ -8,4 +8,9 @@
         android:orderInCategory="100"
         app:showAsAction="ifRoom"
         android:icon="@drawable/ic_action_name"/>
+
+    <item android:title="Log Out"
+        android:id="@+id/logOut"
+        android:orderInCategory="100"
+        app:showAsAction="ifRoom"/>
 </menu>
