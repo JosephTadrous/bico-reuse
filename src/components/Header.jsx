@@ -19,6 +19,7 @@ export default function Header() {
 
 				<NavLink className="UsersButton" to={'/users'}>
 					<h3>Users</h3>
+				</NavLink>
 				<NavLink className="CreateButton" to={'/dashboard'}>
 					<h3>+ Dashboard</h3>
 				</NavLink>
