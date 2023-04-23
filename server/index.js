@@ -304,6 +304,15 @@ app.use("/create_user", (req, res) => {
 });
 
 
+app.get("/dashboard", (req, res) => {
+	// get dashboard data
+	var dashboard_data = {}
+	Promise.all([Post.countDocuments({"approved": true}), User.countDocuments()]).then((values) => {
+		dashboard_data["post_count"] = values[0]; 
+		dashboard_data["user_count"] = values[1]; 
+		res.json(dashboard_data); 
+	})
+});
 
 app.listen(3000, () => {
 	console.log('Listening on port 3000');
