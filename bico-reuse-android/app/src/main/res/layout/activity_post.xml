@@ -56,11 +56,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingStart="12dp"
-                android:paddingBottom="8dp"
                 android:background="@color/primary"
                 android:fontFamily="@font/poppins_semibold"
                 android:textColor="#F0F0F0"
                 android:textSize="14sp" />
+
+            <ImageView
+                android:id="@+id/image"
+                android:layout_width="fill_parent"
+                android:layout_height="300dp"
+                android:layout_marginTop="16dp" />
 
             <TextView
                 android:id="@+id/tvDescription"
@@ -72,26 +77,27 @@
                 android:textColor="#2D3047"
                 android:textSize="16sp" />
 
-            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            <LinearLayout
                 android:id="@+id/body_buttons"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="24dp"
                 android:layout_marginBottom="32dp"
                 android:orientation="horizontal" >
+
                 <Button
                     android:id="@+id/btnDelete"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:backgroundTint="#FF3030"
-                    android:textColor="#F0F0F0"
-                    android:fontFamily="@font/poppins_semibold"
-                    android:text="Delete"
-                    android:onClick="onDeleteButtonClick"
                     android:layout_marginStart="20dp"
                     android:layout_marginEnd="60dp"
-                    android:layout_weight="1" />
+                    android:layout_weight="1"
+                    android:backgroundTint="#FF3030"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:onClick="onDeleteButtonClick"
+                    android:text="Delete"
+                    android:textColor="#F0F0F0" />
 
 
                 <Button

@@ -2,9 +2,14 @@ package edu.brynmawr.cmsc353.bicoreuse;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -12,11 +17,17 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.net.URL;
+
+import edu.brynmawr.cmsc353.bicoreuse.info.PostInfo;
+
 public class RecycleViewAdapter extends RecyclerView.Adapter<PostViewHolder> {
     JSONArray dataArray = new JSONArray();
+    private ImageView image;
 
     private String userId;
     private String postId;
+    private String imageURL;
 
     Context context;
 //    ClickListener listiner;
@@ -39,6 +50,7 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<PostViewHolder> {
         View photoView = inflater.inflate(R.layout.activity_individual_post_on_homepage, parent, false);
 
         PostViewHolder viewHolder = new PostViewHolder(photoView, userId);
+
         return viewHolder;
     }
 
@@ -55,6 +67,11 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<PostViewHolder> {
             viewHolder.title.setText(dataArray.getJSONObject(position).get("title").toString());
             // viewHolder.description.setText(dataArray.getJSONObject(position).get("description").toString());
             viewHolder.price.setText("$" + dataArray.getJSONObject(position).get("price").toString());
+//            postId = viewHolder.getPostId();
+            PostInfo post = new PostInfo(jo.getString("_id"));
+            imageURL = post.getImage();
+            viewHolder.displayPhoto(imageURL);
+//
         } catch (JSONException e) {
             throw new RuntimeException(e);
         }

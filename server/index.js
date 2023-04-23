@@ -140,7 +140,7 @@ app.use("/edit_post", (req, res) => {
 
 	var filter = {'_id' : postId};
 	// 
-	var action = { '$set' : { 'title' :  newTitle, 'description': newDesc, 'price': newPrice, 'image': [newPhotos], 'status': newStatus} };
+	var action = { '$set' : { 'title' :  newTitle, 'description': newDesc, 'price': newPrice, 'photos': [newPhotos], 'status': newStatus} };
 
 	let updatedPost = Post.findOneAndUpdate(filter, action)
 	.then(
@@ -151,12 +151,13 @@ app.use("/edit_post", (req, res) => {
 			} else {
 				// res.json({'status' : 'updated the post'});
 				// console.log("SUCCESS!");
+				console.log(oldPost.photos[0]);
 				res.redirect('http://localhost:5173/');
 			}
 		},
 		(error) => {
 			// if an error occurs 
-			// console.log("ERROR");
+			console.log(error);
 			res.status(500).send(error);
 		}
 	);

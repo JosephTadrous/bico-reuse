@@ -34,7 +34,7 @@ export default function PostUpdateForm() {
             Title: <input name="title" defaultValue={post.title} />  <p> </p>
             Description: <input name="description" defaultValue={post.description}/> <p> </p>
             Price: <input name="price" defaultValue={post.price}/> <p> </p>
-            Image: <input name="image" defaultValue={post.image}/> <p> </p>
+            Image: <input name="image" defaultValue={post.photos}/> <p> </p>
             Status: <input name="status" defaultValue={post.status}/> <p> </p>
             {/* <button onClick={clickHandler} type="submit">Cancel</button>	 
             <button onClick={clickHandler} type="submit">Submit</button>	 */}

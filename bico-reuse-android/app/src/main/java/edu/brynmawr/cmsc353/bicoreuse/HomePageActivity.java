@@ -28,6 +28,7 @@ public class HomePageActivity extends AppCompatActivity {
     RecycleViewAdapter adapter;
     RecyclerView recyclerView;
     private String userId;
+    private String postId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
