@@ -244,9 +244,12 @@ app.use("/create_post", (req, res) => {
 	title = req.body.title; 
 	description = req.body.description; 
 	price = Number(req.body.price); 
-	photo = req.body.photo
+	photo = req.body.photo;
+
+	let post_id= new mongoose.Types.ObjectId();
+
 	let newPost= new Post({
-		_id: new mongoose.Types.ObjectId(),
+		_id: post_id,
 		seller: user_id,
 		title: title,
 		date: Date.now(),
@@ -256,10 +259,21 @@ app.use("/create_post", (req, res) => {
 		status: 'available'
 	  });
 	const post_result= newPost.save();
-	post_result.then((response) =>  { res.redirect("http://localhost:5173/")}, 
+	post_result.then((response) =>  { console.log("created post") }, 
 	(error) => {
 		res.status(500).send("Something went wrong"); 
 	})
+	
+	var action = { $push: { "history" : post_id } };
+
+	User.findByIdAndUpdate(user_id, action)
+	.then((response) => {
+		res.redirect("http://localhost:5173/")
+	})
+	.catch((error) => {
+		res.status(500).send("Something went wrong");
+	});
+	
 });
 
 app.use("/delete_post", (req, res) => {
@@ -271,11 +285,29 @@ app.use("/delete_post", (req, res) => {
 	
 	console.log(post_id); 
 	console.log("Deleting post " + post_id); 
-	Post.deleteOne({ '_id': post_id }).then((response) =>  {res.redirect("http://localhost:5173/")}, 
+	Post.deleteOne({ '_id': post_id }).then((response) =>  {}, 
 	(error) => {
-		res.status(500).send("Something went wrong"); 
+		res.status(500).send("Could not delete post"); 
 	}); 
 
+	action= { $inc: {'items_sold': 1} };
+	Info.findByIdAndUpdate(0, action)
+	.then((response) => 
+		{ console.log("incremented items sold by 1"); }	
+	)
+	.catch( (error) => 
+		res.status(500).send("Could not increment items_sold")
+	);
+
+	action= { $pullAll : {"history" : post_id} };
+
+	User.findByIdAndUpdate(user_id, action)
+	.then((response) => 
+		res.redirect("http://localhost:5173/")
+	)
+	.catch( (error) => 
+		res.status(500).send("Could not delete from history")
+	);
 
 });
 
@@ -294,15 +326,13 @@ app.use('/delete_user', (req, res) => {
 		res.status(500).send("Something went wrong with deleting user");
 	});
 	
-
-	
 	Post.deleteMany({'_id': {$in: user_posts}})
 	.then((response) => { console.log("Deleted " + user_posts); 
 		res.redirect("http://localhost:5173/"); },
 				(error) => {
 					res.status(500).send("Something went wrong with deleting user");
 	});
-	
+
 });
 
 
