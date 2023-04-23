@@ -16,7 +16,7 @@ export default function EditProfileForm() {
     const requestUrl = `http://localhost:3000/update?id=${user._id}`;
 
 	return (
-		<html className="EditForm"> 
+		<div className="EditForm"> 
             <form className="FormInside" action={requestUrl} method="post">
             <div className="FormName">Name: <input name="name" defaultValue={user.name}/> </div> <p> </p>
             <div className="FormCollege">College: <input name="college" defaultValue={user.college}/></div> <p> </p>
@@ -28,6 +28,6 @@ export default function EditProfileForm() {
 							<input className="EditButton" type="submit" value="Submit form!"/>
 						</div>
             </form>
-        </html>
+        </div>
 	)
 }

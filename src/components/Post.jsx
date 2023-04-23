@@ -22,7 +22,13 @@ export default function Post({post}) {
 						</div>
 
 						<div className="SellerInfo">
-							<h5>Seller: {post.seller.name}</h5>
+								<h5>Seller: 
+									<NavLink
+										to={'/profile'}
+										state={{userId: post.seller._id}}>
+										{" " + 	post.seller.name}
+									</NavLink>	
+								</h5>
 							<h5>Email:  {post.seller.email}</h5>
 							<h5>Phone:  {post.seller.phone}</h5>
 						</div>
@@ -41,11 +47,12 @@ export default function Post({post}) {
 					</div>
 					<p className="Description">{post.description}</p>
 					<form action="http://localhost:3000/delete_post" method="post">
-					<input type="hidden" name="id" value= {post._id} />
-					<button className="EditButton"> Delete</button>
-					<NavLink className="CreateEditButton" to={'/editPost/' + post._id} state={{post: post}}>
-						<button className="EditButton">Edit</button>
-					</NavLink>	
+						<input type="hidden" name="id" value= {post._id} />
+						<input type="hidden" name="user_id" value= {post.seller._id} />
+						<button className="DeleteButton">Delete</button>
+						<NavLink className="CreateEditButton" to={'/editPost/' + post._id} state={{post: post}}>
+							<button className="EditButton">Edit</button>
+						</NavLink>	
 					</form>
 			</div>
 		}

@@ -1,5 +1,6 @@
 import React from 'react';
 import {useNavigate} from 'react-router-dom';
+import './CreatePostForm.css';
 import { useState, useEffect } from 'react';
 
 
@@ -11,18 +12,19 @@ export default function CreatePostForm({post}) {
 	}
 
 	return (
-		<div className="EditForm"> 
-        <form action="http://localhost:3000/create_post" method="post" onsubmit='return false'>
-        User ID: <input name="user_id"/> <p> </p>
-        Title: <input name="title"/>  <p> </p>
-        Description: <input name="description"/> <p> </p>
-        Price: <input name="price"/> <p> </p>
-        Image: <input name="photo"/> <p> </p>
+		<div className="EditForm">
+			<h1>Create Post</h1>
+			<form className="InputForm" action="http://localhost:3000/create_post" method="post">
+        <div className="UserIdInput"><div className="TextContainer">User ID:</div> <input name="user_id"/></div> 
+        <div className="TitleInput"><div className="TextContainer">Title:</div> <input name="title"/></div>  
+        <div className="DescriptionInput"><div className="TextContainer">Description:</div> <input name="description"/></div> 
+        <div className="PriceInput"><div className="TextContainer">Price:</div> <input name="price"/></div> 
+        <div className="PhotoInput"><div className="TextContainer">Image:</div> <input name="photo"/></div> 
 				<div className="Buttons">
-					<button onClick={clickHandler} className="EditButton" type="submit">Cancel</button>
-					<input className="EditButton" type="submit" value="Submit form!" href="http://localhost:5173"/>
+					<button onClick={clickHandler} className="CancelButton" type="submit">Cancel</button>
+					<input className="EditButton" type="submit" value="Submit" href="http://localhost:5173"/>
 				</div>
-        </form>
+			</form>
     </div>
 	)
 }

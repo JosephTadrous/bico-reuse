@@ -13,6 +13,8 @@ import Profile from './Profile';
 import PostUpdateForm from './PostUpdateForm';
 import Dashboard from './Dashboard';
 
+import UserPage from './UserComponents/UserPage';
+
 
 export default function Home() {
 	const [posts, setPosts] = useState([]);
@@ -23,13 +25,14 @@ export default function Home() {
 		.then((posts) => {
 			setPosts(posts);
 		});
-	});
+	}, []);
 
 	return (
 		<div className="HomePage">
 			<Header />
 			<Routes>
 				<Route exact path='/' element={	<HomePostList posts={posts} /> }></Route>
+				<Route exact path='/users' element= { <UserPage />}> </Route>
 				<Route exact path='/profile' element={ <Profile />}></Route>
 				<Route exact path='/post' element={ <PostPage /> }></Route>
 				<Route exact path='/create' element={ <CreatePostForm /> }></Route>
