@@ -437,7 +437,8 @@ app.use('/items_sold', (req, res) => {
 	)
 	.catch( (error) =>
 		console.log(error)
-	);
+	)
+});
 
 app.get("/dashboard", (req, res) => {
 	// get dashboard data
