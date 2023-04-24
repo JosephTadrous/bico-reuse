@@ -49,6 +49,7 @@ export default function Post({post}) {
 							<button className="EditButton"> Approve</button>
 							</form>: null
 						}
+					</div>
 					<div className="Description">
 						<h3>Description:</h3>
 						<p>{post.description}</p>
