@@ -87,7 +87,7 @@ public class HomePageActivity extends AppCompatActivity {
                             // and that it has a /test endpoint that returns a JSON object with
                             // a field called "message"
 
-                            URL url = new URL("http://10.0.2.2:3000/api");
+                            URL url = new URL("http://10.0.2.2:3000/all_approved");
 
                             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                             conn.setRequestMethod("GET");

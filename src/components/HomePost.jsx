@@ -25,6 +25,15 @@ export default function HomePost({post}) {
 				state={{userId: post.seller._id}}>
 				<h3 className="PostSeller">{post.seller.name}</h3>
 			</NavLink>
+
+			<div>
+				{post.approved != true ?
+					<form action="http://localhost:3000/approve_post" method="post">
+					<input type="hidden" name="id" value= {post._id} />
+					<button className="EditButton"> Approve</button>
+					</form>: null
+				}
+			</div>
 		</div>
 	)
 }

@@ -20,7 +20,7 @@ export default function Home() {
 	const [posts, setPosts] = useState([]);
 
 	useEffect( () => {
-		fetch('http://localhost:3000/api')
+		fetch('http://localhost:3000/all')
 		.then((res) => res.json())
 		.then((posts) => {
 			setPosts(posts);
