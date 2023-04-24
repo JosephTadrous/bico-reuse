@@ -41,7 +41,10 @@ export default function Post({post}) {
 							})
 						}
 					</div>
-					<p className="Description">{post.description}</p>
+					<div className="Description">
+						<h3>Description:</h3>
+						<p>{post.description}</p>
+					</div>
 					<div>
 						{post.approved != true ?
 							<form action="http://localhost:3000/approve_post" method="post">
@@ -49,10 +52,6 @@ export default function Post({post}) {
 							<button className="EditButton"> Approve</button>
 							</form>: null
 						}
-					</div>
-					<div className="Description">
-						<h3>Description:</h3>
-						<p>{post.description}</p>
 					</div>
 					<form action="http://localhost:3000/delete_post" method="post">
 						<input type="hidden" name="id" value= {post._id} />

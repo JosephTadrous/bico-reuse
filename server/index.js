@@ -454,14 +454,14 @@ app.use('/delete_user', (req, res) => {
 	(error) => {
 		res.status(500).send("Something went wrong with deleting user");
 	});
-	
+
 	if (user_posts) {
 		Post.deleteMany({'_id': {$in: user_posts}})
 		.then(
 			(response) => { console.log("Deleted " + user_posts); 
 				res.redirect("http://localhost:5173/"); },
 			(error) => {
-				res.status(500).send("Something went wrong with deleting posts");
+				res.redirect("http://localhost:5173/");
 		});
 	} else {
 		res.redirect("http://localhost:5173/");
