@@ -1,0 +1,24 @@
+.User {
+	flex: 1;
+	display: flex;
+	justify-content: flex-start;
+	align-items: flex-start;
+	margin: 0;
+	padding: 4px;
+	gap: 4px;
+}
+
+.User .UserLink {
+  width: fit-content;
+  height: fit-content;
+}
+
+.User h3 {
+  height: fit-content;
+  margin: 0px;
+	color: var(--fuscous-gray);
+}
+
+.UserLink h3:hover {
+	color: var(--black-default);
+}

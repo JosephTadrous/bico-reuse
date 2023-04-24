@@ -16,6 +16,14 @@ export default function Header() {
 				<NavLink className="CreateButton" to={'/create'}>
 					<h3>+ New Post</h3>
 				</NavLink>
+
+				<NavLink className="UsersButton" to={'/users'}>
+					<h3>Users</h3>
+				</NavLink>
+				
+				<NavLink className="CreateButton" to={'/dashboard'}>
+					<h3>+ Dashboard</h3>
+				</NavLink>
 				
 				{/* <NavLink to={'/profile'}>
 					<img className="pfp" src={PFP} alt="PFP" />

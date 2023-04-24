@@ -22,30 +22,36 @@ export default function Post({post}) {
 						</div>
 
 						<div className="SellerInfo">
-							<h5>Seller: {post.seller.name}</h5>
+								<h5>Seller: 
+									<NavLink
+										to={'/profile'}
+										state={{userId: post.seller._id}}>
+										{" " + 	post.seller.name}
+									</NavLink>	
+								</h5>
 							<h5>Email:  {post.seller.email}</h5>
 							<h5>Phone:  {post.seller.phone}</h5>
 						</div>
 					</div>
 					
-					<div className="pictures">
+					<div className="Pictures">
 						{
 							post.photos.map((picture) => {
-								import(`../assets/${picture}.svg`).then((image) => {
-									setCurrentPic(image.default);
-								}).catch((err) => 
-									console.log("Something went wrong with importing picture"));
-								return <img key={Date.now()} src={currentPic} alt="picture" />
+								return <img key={Date.now()} src={picture} alt=":( unknown picture" />
 							})
 						}
 					</div>
-					<p className="Description">{post.description}</p>
+					<div className="Description">
+						<h3>Description:</h3>
+						<p>{post.description}</p>
+					</div>
 					<form action="http://localhost:3000/delete_post" method="post">
-					<input type="hidden" name="id" value= {post._id} />
-					<button className="EditButton"> Delete</button>
-					<NavLink className="CreateEditButton" to={'/editPost/' + post._id} state={{post: post}}>
-						<button className="EditButton">Edit</button>
-					</NavLink>	
+						<input type="hidden" name="id" value= {post._id} />
+						<input type="hidden" name="user_id" value= {post.seller._id} />
+						<button className="DeleteButton">Delete</button>
+						<NavLink className="CreateEditButton" to={'/editPost/' + post._id} state={{post: post}}>
+							<button className="EditButton">Edit</button>
+						</NavLink>	
 					</form>
 			</div>
 		}
