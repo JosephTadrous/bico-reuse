@@ -14,7 +14,7 @@ function formatDate(date){
 
 function Last7Days () {
     var result = [];
-    for (var i=0; i<7; i++) {
+    for (var i=0; i<8; i++) {
         var d = new Date();
         d.setDate(d.getDate() - i);
         result.push(d)
@@ -62,7 +62,7 @@ export default function Dashboard() {
     <div> Number of items sold: {itemSold }</div>
     <Plot
         data={[
-          {type: 'scatter', x: Last7Days(), y: week},
+          {type: 'bar', x: Last7Days(), y: week},
         ]}
         layout={ {width: 640, height: 480, title: 'Number of posts per day (last 7 days)'} }
       />
