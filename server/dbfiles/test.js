@@ -5,7 +5,9 @@ let mongoose= require('mongoose');
 
 let User= require('./User.js');
 let Post= require('./Post.js');
+let Info= require('./Info.js');
 
+/*
 let newUser= new User({
   _id: new mongoose.Types.ObjectId(),
   name: 'David Dinh',
@@ -28,6 +30,8 @@ let newPost= new Post({
   status: 'available'
 });
 
+
+
 newUser.history.push(newPost._id);
 
 const user_result= newUser.save();
@@ -35,4 +39,16 @@ user_result.then((response) => console.log(response));
 
 const post_result= newPost.save();
 post_result.then((response) => console.log(response));
+*/
+
+/*
+let newInfo= new Info({
+	_id: 0,
+	items_sold: 0,
+	posts_past_7_days: [0, 0, 0, 0, 0, 0, 0]
+});
+
+const info_result= newInfo.save();
+info_result.then((response) => console.log(response));
+*/
 
