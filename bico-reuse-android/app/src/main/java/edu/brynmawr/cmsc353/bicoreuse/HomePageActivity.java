@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -28,6 +29,7 @@ public class HomePageActivity extends AppCompatActivity {
     RecycleViewAdapter adapter;
     RecyclerView recyclerView;
     private String userId;
+    private String postId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +39,7 @@ public class HomePageActivity extends AppCompatActivity {
         Intent intent= getIntent();
 
         userId= intent.getStringExtra("userId");
-        
+
 
     }
 
@@ -57,7 +59,17 @@ public class HomePageActivity extends AppCompatActivity {
             case R.id.profile:
                 Intent i = new Intent(this, ProfileActivity.class);
                 i.putExtra("id", userId);
+                i.putExtra("curUserId", userId);
                 startActivity(i);
+            case R.id.logOut:
+                this.finish();
+                break;
+            case R.id.favorites:
+                Intent j = new Intent(this, BookmarksActivity.class);
+                j.putExtra("userId", userId);
+                j.putExtra("type", "get_bookmarks");
+                startActivity(j);
+                break;
         }
         return super.onOptionsItemSelected(item);
     }
@@ -87,7 +99,7 @@ public class HomePageActivity extends AppCompatActivity {
                             // and that it has a /test endpoint that returns a JSON object with
                             // a field called "message"
 
-                            URL url = new URL("http://10.0.2.2:3000/api");
+                            URL url = new URL("http://10.0.2.2:3000/all_approved");
 
                             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                             conn.setRequestMethod("GET");
@@ -129,12 +141,57 @@ public class HomePageActivity extends AppCompatActivity {
         return data;
     }
 
+    private JSONArray bookmarked;
+
+    public JSONArray isBookmarked() {
+        try {
+            ExecutorService executor = Executors.newSingleThreadExecutor();
+            executor.execute( () -> {
+                        try {
+                            // assumes that there is a server running on the AVD's host on port 3000
+                            // and that it has a /test endpoint that returns a JSON object with
+                            // a field called "message"
+
+                            URL url = new URL("http://10.0.2.2:3000/profile?id=" + userId);
+
+                            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                            conn.setRequestMethod("GET");
+                            conn.connect();
+
+                            Scanner in = new Scanner(url.openStream());
+                            String response = in.nextLine();
+
+                            JSONObject jo = new JSONObject(response);
+                            // need to set the instance variable in the Activity object
+                            // because we cannot directly access the TextView from here
+                            bookmarked = jo.getJSONArray("bookmarked");
+                        }
+                        catch (Exception e) {
+                            e.printStackTrace(); }
+                    }
+            );
+
+            // this waits for up to 2 seconds
+            // it's a bit of a hack because it's not truly asynchronous
+            // but it should be okay for our purposes (and is a lot easier)
+            executor.awaitTermination(2, TimeUnit.SECONDS);
+            return bookmarked;
+
+        }
+        catch (Exception e) {
+            // uh oh
+            e.printStackTrace();
+        }
+        return bookmarked;
+    }
+
     @Override
     public void onResume(){
         super.onResume();
         JSONArray dataArray = connectToServer();
+        JSONArray userBookmarks = isBookmarked();
         recyclerView = (RecyclerView)findViewById(R.id.recyclerView);
-        adapter = new RecycleViewAdapter(dataArray, getApplication(), this.userId);
+        adapter = new RecycleViewAdapter(dataArray, getApplication(), this.userId, userBookmarks);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(HomePageActivity.this));
 

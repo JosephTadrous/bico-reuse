@@ -50,6 +50,28 @@
 .Description {
 	margin: 0px;
 	padding: 16px;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+}
+
+.Description p {
+	margin: 4px;
+	margin-left: 0px;
+}
+
+.Description h3 {
+	margin: 0px;
+}
+
+.Pictures {
+	margin-top: 16px;
 }
 
 
+
+.Pictures img { 
+  width: 100%; 
+  max-width: 500px; 
+  height: auto; 
+}

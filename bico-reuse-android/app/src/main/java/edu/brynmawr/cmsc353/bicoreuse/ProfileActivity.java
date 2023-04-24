@@ -31,9 +31,10 @@ public class ProfileActivity extends AppCompatActivity {
     private TextView tvEmailInput;
     private TextView tvPhone;
     private TextView tvPhoneInput;
-    private TextView tvPostsHistory;
+    private Button btnPostsHistory;
     private Button btnEdit;
     protected String id;
+    protected String curUserId;
 
 
     @Override
@@ -51,10 +52,12 @@ public class ProfileActivity extends AppCompatActivity {
         tvEmailInput = findViewById(R.id.tvEmailInput);
         tvPhone = findViewById(R.id.tvPhone);
         tvPhoneInput = findViewById(R.id.tvPhoneInput);
-        tvPostsHistory = findViewById(R.id.tvPostsHistory);
+        btnPostsHistory = findViewById(R.id.btnPostsHistory);
+        btnEdit = findViewById(R.id.btnEdit);
 
         Intent intent = getIntent();
         id = intent.getStringExtra("id");
+        curUserId = intent.getStringExtra("curUserId");
 
         //loadData();
 
@@ -122,6 +125,12 @@ public class ProfileActivity extends AppCompatActivity {
     public void onResume(){
         super.onResume();
         this.loadData();
+        // set button visibilities if the user == seller
+        if (id.equals(curUserId)) {
+            btnEdit.setVisibility(View.VISIBLE);
+        } else {
+            btnEdit.setVisibility(View.GONE);
+        }
     }
 
     // redirects to edit profile activity
@@ -132,6 +141,13 @@ public class ProfileActivity extends AppCompatActivity {
         i.putExtra("college", college);
         i.putExtra("email", email);
         i.putExtra("phone", phone);
+        this.startActivity(i);
+    }
+
+    public void onClickPostsHistory(View v) {
+        Intent i = new Intent(this, BookmarksActivity.class);
+        i.putExtra("userId", id);
+        i.putExtra("type", "get_history");
         this.startActivity(i);
     }
 }

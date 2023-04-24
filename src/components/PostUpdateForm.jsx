@@ -29,20 +29,21 @@ export default function PostUpdateForm() {
 	return (
 
 		<div className="EditForm">
-        <form action="http://localhost:3000/edit_post/" method="post">
-            <input type="hidden" name="id" defaultValue={post._id}/> <p> </p>
-            Title: <input name="title" defaultValue={post.title} />  <p> </p>
-            Description: <input name="description" defaultValue={post.description}/> <p> </p>
-            Price: <input name="price" defaultValue={post.price}/> <p> </p>
-            Image: <input name="image" defaultValue={post.image}/> <p> </p>
-            Status: <input name="status" defaultValue={post.status}/> <p> </p>
-            {/* <button onClick={clickHandler} type="submit">Cancel</button>	 
-            <button onClick={clickHandler} type="submit">Submit</button>	 */}
-						<button onClick={clickHandler} className="EditButton" type="submit">Cancel</button>	 
-            <button className="EditButton" type="submit">Submit</button>	
-        </form>
-        </div>
+			<h1>Edit Post</h1>
+			<form className="InputForm" action="http://localhost:3000/edit_post/" method="post">
+					<input type="hidden" name="id" defaultValue={post._id} />
+					<div className="TitleInput"><div className="TextContainer">Title:</div> <input name="title" defaultValue={post.title}/></div>  
+					<div className="DescriptionInput"><div className="TextContainer">Description:</div> <input name="description" defaultValue={post.description}/></div> 
+					<div className="PriceInput"><div className="TextContainer">Price:</div> <input name="price" defaultValue={post.price}/></div> 
+					<div className="PhotoInput"><div className="TextContainer">Image:</div> <input name="photo" defaultValue={post.image}/></div> 
+					<div className="StatusInput"><div className="TextContainer">Status:</div> <input name="status" defaultValue={post.status}/></div>	
 
+					<div className="Buttons">
+						<button onClick={clickHandler} className="CancelButton" type="submit">Cancel</button>
+						<button className="EditButton" type="submit">Submit</button>
+					</div>
+			</form>
+    </div>
 	)
 }
 

@@ -3,9 +3,25 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <!-- action button for search -->
-    <item android:title="profile"
+    <item
+        android:id="@+id/favorites"
+        android:icon="@drawable/favorites"
+        android:orderInCategory="100"
+        android:title="favorites"
+        app:showAsAction="ifRoom" />
+
+    <item
         android:id="@+id/profile"
+        android:icon="@drawable/ic_action_name"
         android:orderInCategory="100"
         app:showAsAction="ifRoom"
         android:icon="@drawable/ic_action_name"/>
+
+    <item android:title="Log Out"
+        android:id="@+id/logOut"
+        android:orderInCategory="100"
+        app:showAsAction="ifRoom"/>
+        android:title="logOut"
+        app:showAsAction="ifRoom" />
+
 </menu>
