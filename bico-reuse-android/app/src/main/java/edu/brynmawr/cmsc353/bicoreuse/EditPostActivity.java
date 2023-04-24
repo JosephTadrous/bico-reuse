@@ -12,6 +12,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.DataOutputStream;
@@ -59,6 +60,7 @@ public class EditPostActivity extends AppCompatActivity {
         title= intent.getStringExtra("title");
         description= intent.getStringExtra("description");
         price= intent.getStringExtra("price");
+        image = intent.getStringExtra("image");
 
         ivSolidEdit = findViewById(R.id.ivSolidEdit);
         PostEdit = findViewById(R.id.PostEdit);
@@ -74,6 +76,7 @@ public class EditPostActivity extends AppCompatActivity {
         TitleInputEdit.setText(title);
         DescriptionInputEdit.setText(description);
         PriceInputEdit.setText(price);
+        ImageInputEdit.setText(image);
 
 
 
@@ -119,7 +122,7 @@ public class EditPostActivity extends AppCompatActivity {
                             requestData.put("title", TitleInputEdit.getText().toString());
                             requestData.put("description", DescriptionInputEdit.getText().toString());
                             requestData.put("price", PriceInputEdit.getText().toString());
-                            requestData.put("image", ImageInputEdit.getText().toString());
+                            requestData.put("photo", ImageInputEdit.getText().toString());
 
                             DataOutputStream out = new DataOutputStream(conn.getOutputStream());
                             out.writeBytes(getUrlEncodedData(requestData));
@@ -155,57 +158,6 @@ public class EditPostActivity extends AppCompatActivity {
         this.finish();
     }
 
-    public void loadData() {
-        try {
-            ExecutorService executor = Executors.newSingleThreadExecutor();
-            executor.execute( () -> {
-                        try {
-                            // assumes that there is a server running on the AVD's host on port 3000
-                            // and that it has a /test endpoint that returns a JSON object with
-                            // a field called "message"
-
-                            URL url = new URL("http://10.0.2.2:3000/post?pid=" + postId);
-
-                            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-                            conn.setRequestMethod("GET");
-                            conn.connect();
-
-                            Scanner in = new Scanner(url.openStream());
-                            String response = in.nextLine();
-
-                            JSONObject jo = new JSONObject(response);
-
-                            // need to set the instance variable in the Activity object
-                            // because we cannot directly access the TextView from here
-                            title = jo.getString("title");
-                            description = jo.getString("description");
-                            price = jo.getString("price");
-                            image = jo.getString("image");
-
-                        }
-                        catch (Exception e) {
-                            e.printStackTrace();
-                            Log.i("ERR", e.toString());
-                        }
-                    }
-            );
-
-            // this waits for up to 2 seconds
-            // it's a bit of a hack because it's not truly asynchronous
-            // but it should be okay for our purposes (and is a lot easier)
-            executor.awaitTermination(2, TimeUnit.SECONDS);
-
-            // now we can set the status in the TextView
-            TitleInputEdit.setText(title);
-            DescriptionInputEdit.setText(description);
-            PriceInputEdit.setText(price);
-            ImageInputEdit.setText(image);
-        }
-        catch (Exception e) {
-            // uh oh
-            e.printStackTrace();
-        }
-    }
 
     // format data to be sent in the request body
     private String getUrlEncodedData(Map<String, String> data) throws IOException {

@@ -69,8 +69,22 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<PostViewHolder> {
             // viewHolder.description.setText(dataArray.getJSONObject(position).get("description").toString());
             viewHolder.price.setText("$" + dataArray.getJSONObject(position).get("price").toString());
 //            postId = viewHolder.getPostId();
-            PostInfo post = new PostInfo(jo.getString("_id"));
-            imageURL = post.getImage();
+            Object imageArray = (Object) jo.get("photos");
+            String image = (String) imageArray.toString();
+            image = image.substring(1, image.length() - 1);
+//                        Log.i("image URL", image);
+            StringBuilder builder = new StringBuilder();
+
+
+            for (char c : image.toCharArray()) {
+                // 92 is the Ascii value of "\"
+                if ((int) c != 92 && c != '"') {
+//                                Log.i("char", c + "");
+                    builder.append(c);
+                }
+            }
+
+            imageURL = builder.toString();
             viewHolder.displayPhoto(imageURL);
 //
         } catch (JSONException e) {

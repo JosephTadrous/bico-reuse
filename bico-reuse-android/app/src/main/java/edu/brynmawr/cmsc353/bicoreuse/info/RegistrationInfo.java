@@ -17,13 +17,14 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 public class RegistrationInfo {
+
     private String name;
     private String college;
     private String email;
     private String password;
     private String phone;
 
-    private boolean success;
+    private int success;
 
     public RegistrationInfo(String name, String college, String email, String password, String phone) {
         this.name= name;
@@ -32,8 +33,6 @@ public class RegistrationInfo {
         this.password= password;
         this.phone= phone;
 
-
-        this.success= false;
     }
 
     public void submitData() {
@@ -63,10 +62,12 @@ public class RegistrationInfo {
 
                             int responseCode = conn.getResponseCode();
 
-                            if (responseCode == HttpURLConnection.HTTP_OK) {
-                                success= true;
+                            if (responseCode == 200) {
+                                success= 0;
+                            } else if (responseCode == 400) {
+                                success= 1;
                             } else {
-                                success= false;
+                                success= 2;
                             }
 
 
@@ -102,7 +103,7 @@ public class RegistrationInfo {
         return builder.toString();
     }
 
-    public boolean isSuccess() {
+    public int getSuccessStatus() {
         return success;
     }
 }

@@ -70,6 +70,7 @@ public class ProfileActivity extends AppCompatActivity {
     protected String email;
     protected String phone;
 
+
     public void loadData() {
         try {
             ExecutorService executor = Executors.newSingleThreadExecutor();

@@ -61,6 +61,7 @@ public class HomePageActivity extends AppCompatActivity {
                 i.putExtra("id", userId);
                 i.putExtra("curUserId", userId);
                 startActivity(i);
+                break;
             case R.id.logOut:
                 this.finish();
                 break;
@@ -81,9 +82,15 @@ public class HomePageActivity extends AppCompatActivity {
         this.startActivity(i);
     }
 
-    public void onBackPressed() {
-        super.onBackPressed();
-    }
+//    @Override
+//    public void onBackPressed() {
+//        Intent intent = new Intent(HomePageActivity.this,
+//                LoginActivity.class);
+//        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
+//                | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+//        startActivity(intent);
+//
+//    }
 
 
     protected String message;
@@ -188,6 +195,7 @@ public class HomePageActivity extends AppCompatActivity {
     @Override
     public void onResume(){
         super.onResume();
+        Log.i("EHHHH", "HEY");
         JSONArray dataArray = connectToServer();
         JSONArray userBookmarks = isBookmarked();
         recyclerView = (RecyclerView)findViewById(R.id.recyclerView);

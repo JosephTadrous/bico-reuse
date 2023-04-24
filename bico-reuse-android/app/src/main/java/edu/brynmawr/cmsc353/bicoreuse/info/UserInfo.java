@@ -85,7 +85,7 @@ public class UserInfo {
             // this waits for up to 2 seconds
             // it's a bit of a hack because it's not truly asynchronous
             // but it should be okay for our purposes (and is a lot easier)
-            executor.awaitTermination(2, TimeUnit.SECONDS);
+            executor.awaitTermination(1, TimeUnit.SECONDS);
 
         }
         catch (Exception e) {

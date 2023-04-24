@@ -112,12 +112,17 @@ public class RegisterActivity extends AppCompatActivity {
             RegistrationInfo registrationInfo= new RegistrationInfo(name, college, email, password, phone);
 
             registrationInfo.submitData();
-            if (registrationInfo.isSuccess()) {
+            int registrationStatus= registrationInfo.getSuccessStatus();
+            if (registrationStatus == 0) {
                 Toast.makeText(getApplicationContext(),
                         "You have successfully registered!\n You can now login!",
                         Toast.LENGTH_LONG).show();
 
                 this.finish();
+            } else if (registrationStatus == 1) {
+                Toast.makeText(getApplicationContext(),
+                        "This email is already registered!",
+                        Toast.LENGTH_LONG).show();
             } else {
                 Toast.makeText(getApplicationContext(),
                         "Something went wrong. Try again!",

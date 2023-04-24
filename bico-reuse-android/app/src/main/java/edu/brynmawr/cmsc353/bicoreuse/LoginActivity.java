@@ -68,7 +68,6 @@ public class LoginActivity extends AppCompatActivity {
 
                 Intent i= new Intent(this, HomePageActivity.class);
                 i.putExtra("userId", loginInfo.getUserId());
-                i.putExtra("endpoint", "api");
 
                 this.startActivity(i);
 
