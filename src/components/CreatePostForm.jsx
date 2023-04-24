@@ -14,7 +14,7 @@ export default function CreatePostForm({post}) {
 		<div className="EditForm">
 			<h1>Create Post</h1>
 			<form className="InputForm" action="http://localhost:3000/create_post" method="post">
-        <div className="UserIdInput"><div className="TextContainer">User ID:</div> <input name="user_id"/></div> 
+        <input type="hidden" defaultValue={'64457277361d71f17694f1ff'} name="user_id"/>
         <div className="TitleInput"><div className="TextContainer">Title:</div> <input name="title"/></div>  
         <div className="DescriptionInput"><div className="TextContainer">Description:</div> <input name="description"/></div> 
         <div className="PriceInput"><div className="TextContainer">Price:</div> <input name="price"/></div> 

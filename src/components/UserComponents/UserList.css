@@ -10,5 +10,5 @@ ul {
 	justify-content: space-between;
 	padding: 12px;
 	gap: 24px;
-  align-items: flex-start;
+  align-items: left;
 }

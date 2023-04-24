@@ -160,12 +160,12 @@ app.use("/edit_post", (req, res) => {
 	var newTitle = req.body.title;
 	var newDesc = req.body.description; 
 	var newPrice = Number(req.body.price);
-	var newPhotos = req.body.image;
+	var newPhotos = req.body.photo;
 	var newStatus = req.body.status;
 
 	var filter = {'_id' : postId};
 	// 
-	var action = { '$set' : { 'title' :  newTitle, 'description': newDesc, 'price': newPrice, 'image': [newPhotos], 'status': newStatus} };
+	var action = { '$set' : { 'title' :  newTitle, 'description': newDesc, 'price': newPrice, 'photos': [newPhotos], 'status': newStatus} };
 
 	let updatedPost = Post.findOneAndUpdate(filter, action)
 	.then(
@@ -282,6 +282,16 @@ app.use("/delete_post", (req, res) => {
 	post_id = req.body.id; 
 	user_id = req.body.user_id;
 
+	let action= { $pull : {"history" : post_id} };
+
+	// delete post from history
+	User.findByIdAndUpdate(user_id, action)
+	.then((response) => 
+		res.redirect("http://localhost:5173/")
+	)
+	.catch( (error) => 
+		res.status(500).send("Could not delete from history")
+	);
 	
 	console.log(post_id); 
 	console.log("Deleting post " + post_id); 
@@ -299,15 +309,6 @@ app.use("/delete_post", (req, res) => {
 		res.status(500).send("Could not increment items_sold")
 	);
 
-	action= { $pullAll : {"history" : post_id} };
-
-	User.findByIdAndUpdate(user_id, action)
-	.then((response) => 
-		res.redirect("http://localhost:5173/")
-	)
-	.catch( (error) => 
-		res.status(500).send("Could not delete from history")
-	);
 
 });
 
@@ -326,12 +327,17 @@ app.use('/delete_user', (req, res) => {
 		res.status(500).send("Something went wrong with deleting user");
 	});
 	
-	Post.deleteMany({'_id': {$in: user_posts}})
-	.then((response) => { console.log("Deleted " + user_posts); 
-		res.redirect("http://localhost:5173/"); },
-				(error) => {
-					res.status(500).send("Something went wrong with deleting user");
-	});
+	if (user_posts) {
+		Post.deleteMany({'_id': {$in: user_posts}})
+		.then(
+			(response) => { console.log("Deleted " + user_posts); 
+				res.redirect("http://localhost:5173/"); },
+			(error) => {
+				res.status(500).send("Something went wrong with deleting posts");
+		});
+	} else {
+		res.redirect("http://localhost:5173/");
+	}
 
 });
 

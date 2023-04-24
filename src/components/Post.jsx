@@ -34,18 +34,17 @@ export default function Post({post}) {
 						</div>
 					</div>
 					
-					<div className="pictures">
+					<div className="Pictures">
 						{
 							post.photos.map((picture) => {
-								import(`../assets/${picture}.svg`).then((image) => {
-									setCurrentPic(image.default);
-								}).catch((err) => 
-									console.log("Something went wrong with importing picture"));
-								return <img key={Date.now()} src={currentPic} alt="picture" />
+								return <img key={Date.now()} src={picture} alt=":( unknown picture" />
 							})
 						}
 					</div>
-					<p className="Description">{post.description}</p>
+					<div className="Description">
+						<h3>Description:</h3>
+						<p>{post.description}</p>
+					</div>
 					<form action="http://localhost:3000/delete_post" method="post">
 						<input type="hidden" name="id" value= {post._id} />
 						<input type="hidden" name="user_id" value= {post.seller._id} />

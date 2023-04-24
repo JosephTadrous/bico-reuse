@@ -55,3 +55,20 @@
     margin-top: 32px;
     padding-bottom: 24px;
 }
+
+.FormCollege,
+.FormName,
+.FormEmail,
+.FormPhone
+{
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+}
+
+.InputForm {
+	margin-top: 16px;
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+}

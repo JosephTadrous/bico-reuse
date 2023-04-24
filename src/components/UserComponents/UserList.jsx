@@ -6,9 +6,9 @@ export default function UserList({users}) {
   return (
   <ul className="UserList">
 		{
-			users.map((user) => {
+			users.map((user, idx) => {
 				return <li key={user._id}> 
-					<User user={user}/>
+					<User user={user} index={idx}/>
 				</li>
 			})
 		}
