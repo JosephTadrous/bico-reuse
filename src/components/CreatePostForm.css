@@ -1,3 +1,26 @@
 .CreatePostForm {
 	color: black;
 }
+
+.InputForm {
+	margin-top: 16px;
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+}
+
+.UserIdInput,
+.TitleInput,
+.DescriptionInput,
+.PriceInput,
+.PhotoInput,
+.StatusInput {
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+}
+
+.TextContainer {
+	width: 128px;
+	text-align: right;
+}

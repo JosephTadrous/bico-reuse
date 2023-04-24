@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,13 +23,26 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 
+import android.widget.CompoundButton;
+import android.widget.TextView;
+import android.widget.ToggleButton;
+import android.widget.Toolbar;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Scanner;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
@@ -47,9 +61,12 @@ public class PostActivity extends AppCompatActivity {
     private TextView tvPhone;
     private Button btnDelete;
     private Button btnEdit;
+    private ToggleButton btnBookmark;
 
     private UserInfo curUser;
     private PostInfo postInfo= null;
+    private JSONArray bookmarkedPosts = null;
+    private List<String> bookmarkedIds = new ArrayList<>();
 
     private String postId;
     private String userId;
@@ -59,6 +76,33 @@ public class PostActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post);
+
+        Intent intent= getIntent();
+        postId= intent.getStringExtra("postId");
+        userId= intent.getStringExtra("userId");
+        String getBookmarks = intent.getStringExtra("userBookmarks");
+        try {
+            bookmarkedPosts = new JSONArray(getBookmarks);
+            for (int i = 0; i < bookmarkedPosts.length(); i++) {
+                bookmarkedIds.add(bookmarkedPosts.getJSONObject(i).getString("_id"));
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
+        curUser= new UserInfo(userId);
+        postInfo= new PostInfo(postId);
+
+        tvTitle= findViewById(R.id.tvTitle);
+        tvSeller= findViewById(R.id.tvSeller);
+        tvDate= findViewById(R.id.tvDate);
+        tvDescription= findViewById(R.id.tvDescription);
+        tvEmail= findViewById(R.id.tvEmail);
+        tvPhone= findViewById(R.id.tvPhone);
+        btnDelete= findViewById(R.id.btnDelete);
+        btnEdit= findViewById(R.id.btnEdit);
+        btnBookmark = findViewById(R.id.btnBookmark);
     }
 
     public void onDeleteButtonClick(View v) {
@@ -124,6 +168,14 @@ public class PostActivity extends AppCompatActivity {
         return builder.toString();
     }
 
+    public void viewSellerInformation(View v) {
+        Intent i = new Intent(this, ProfileActivity.class);
+        i.putExtra("id", postInfo.getSeller().getId());
+        i.putExtra("curUserId", curUser.getId());
+
+        startActivity(i);
+    }
+
     public void onEditButtonClick(View v) {
         Intent i= new Intent(this, EditPostActivity.class);
         i.putExtra("postId", postId);
@@ -134,6 +186,71 @@ public class PostActivity extends AppCompatActivity {
         i.putExtra("image", postInfo.getImage());
         this.startActivity(i);
     }
+
+    public void updateBookmark(boolean add) {
+        try {
+            ExecutorService executor = Executors.newSingleThreadExecutor();
+            executor.execute( () -> {
+                        try {
+                            // assumes that there is a server running on the AVD's host on port 3000
+                            // and that it has a /test endpoint that returns a JSON object with
+                            // a field called "message"
+                            URL url;
+                            if (add) {
+                                url = new URL("http://10.0.2.2:3000/add_bookmark");
+                            } else {
+                                url = new URL("http://10.0.2.2:3000/delete_bookmark");
+                            }
+
+
+                            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                            conn.setRequestMethod("POST"); // POST request
+                            conn.setDoOutput(true);
+
+                            Map<String, String> requestData = new HashMap<>();
+                            requestData.put("postId", postId);
+                            requestData.put("userId", userId);
+                            DataOutputStream out = new DataOutputStream(conn.getOutputStream());
+                            out.writeBytes(getUrlEncodedData(requestData));
+                            out.flush();
+                            out.close();
+
+
+                            int responseCode = conn.getResponseCode();
+                            if (responseCode == HttpURLConnection.HTTP_OK) {
+                                InputStream in = conn.getInputStream();
+                            } else {
+                                // Handle error response from server
+                            }
+                        }
+                        catch (Exception e) {
+                            Log.i("ERR", e.getMessage());
+                            e.printStackTrace();
+                        }
+                    }
+            );
+
+            // this waits for up to 2 seconds
+            // it's a bit of a hack because it's not truly asynchronous
+            // but it should be okay for our purposes (and is a lot easier)
+            executor.awaitTermination(2, TimeUnit.SECONDS);
+
+        }
+        catch (Exception e) {
+            // uh oh
+            e.printStackTrace();
+        }
+
+    }
+
+    public void isBookmarked() {
+        for (int i = 0; i < bookmarkedIds.size(); i++) {
+            if (bookmarkedIds.get(i).equals(postId)) {
+                btnBookmark.setChecked(true);
+            }
+        }
+    }
+
 
     @Override
     public void onResume(){
@@ -177,6 +294,18 @@ public class PostActivity extends AppCompatActivity {
             btnDelete.setVisibility(View.GONE);
             btnEdit.setVisibility(View.GONE);
         }
+
+        this.isBookmarked();
+        btnBookmark.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                if (isChecked) {
+                    updateBookmark(true);
+                } else {
+                    updateBookmark(false);
+                }
+            }
+        });
 
 
     }

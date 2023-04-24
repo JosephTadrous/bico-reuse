@@ -6,6 +6,8 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.os.Parcelable;
+
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -14,6 +16,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.net.URL;
 
 import edu.brynmawr.cmsc353.bicoreuse.info.PostInfo;
+import org.json.JSONArray;
+
 
 public class PostViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
     TextView sellerName;
@@ -26,11 +30,11 @@ public class PostViewHolder extends RecyclerView.ViewHolder implements View.OnCl
     private String userId;
     private String imageURL;
 
+    private JSONArray userBookmarks;
 
 
 
-
-    PostViewHolder(View itemView, String userId) {
+    PostViewHolder(View itemView, String userId, JSONArray userBookmarks) {
         super(itemView);
         sellerName = (TextView)itemView.findViewById(R.id.Name);
         // description = (TextView)itemView.findViewById(R.id.Desc);
@@ -39,6 +43,7 @@ public class PostViewHolder extends RecyclerView.ViewHolder implements View.OnCl
         image = (ImageView)itemView.findViewById(R.id.Image);
         view  = itemView;
         this.userId= userId;
+        this.userBookmarks = userBookmarks;
         itemView.setClickable(true);
         itemView.setOnClickListener(this);
     }
@@ -61,6 +66,7 @@ public class PostViewHolder extends RecyclerView.ViewHolder implements View.OnCl
         Intent i= new Intent (v.getContext(), PostActivity.class);
         i.putExtra("postId", postId);
         i.putExtra("userId", userId);
+        i.putExtra("userBookmarks", userBookmarks.toString());
         v.getContext().startActivity(i);
     }
 
