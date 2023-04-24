@@ -88,8 +88,8 @@
         android:textColor="#2D3047"
         android:textSize="20sp" />
 
-    <EditText
-        android:id="@+id/etEmailInputEdit"
+    <TextView
+        android:id="@+id/tvEmailInputEdit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"

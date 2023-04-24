@@ -12,7 +12,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class RecycleViewAdapter extends RecyclerView.Adapter<PostViewHolder> {
+public class BookmarkViewAdapter extends RecyclerView.Adapter<BookmarkViewHolder> {
     JSONArray dataArray = new JSONArray();
 
     private String userId;
@@ -22,7 +22,7 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<PostViewHolder> {
     Context context;
 //    ClickListener listiner;
 
-    public RecycleViewAdapter(JSONArray dataArray, Context context, String userId, JSONArray userBookmarks) {
+    public BookmarkViewAdapter(JSONArray dataArray, Context context, String userId, JSONArray userBookmarks) {
         this.dataArray = dataArray;
         this.context = context;
 //        this.listiner = listiner;
@@ -32,7 +32,7 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<PostViewHolder> {
     }
 
     @Override
-    public PostViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public BookmarkViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         Context context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
 
@@ -40,20 +40,20 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<PostViewHolder> {
 
         View photoView = inflater.inflate(R.layout.activity_individual_post_on_homepage, parent, false);
 
-        PostViewHolder viewHolder = new PostViewHolder(photoView, userId, userBookmarks);
+        BookmarkViewHolder viewHolder = new BookmarkViewHolder(photoView, userId, userBookmarks);
         return viewHolder;
     }
 
     @Override
     public void
-    onBindViewHolder(final PostViewHolder viewHolder, final int position) {
+    onBindViewHolder(final BookmarkViewHolder viewHolder, final int position) {
 //        final v = viewHolder.getAdapterPosition();
         try {
             JSONObject jo = dataArray.getJSONObject(position);
             viewHolder.setPostId(jo.getString("_id"));
-            JSONObject seller = (JSONObject) jo.get("seller");
-            String name = seller.get("name").toString();
-            viewHolder.sellerName.setText(name);
+//            JSONObject seller = (JSONObject) jo.get("seller");
+//            String name = seller.get("name").toString();
+            viewHolder.sellerName.setText("");
             viewHolder.title.setText(dataArray.getJSONObject(position).get("title").toString());
             // viewHolder.description.setText(dataArray.getJSONObject(position).get("description").toString());
             viewHolder.price.setText("$" + dataArray.getJSONObject(position).get("price").toString());
