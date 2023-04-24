@@ -64,6 +64,7 @@ ul {
 
 .PostSeller {
 	color: var(--light-gray);
+	margin: 0px;
 }
 
 .PostPrice {
@@ -77,4 +78,12 @@ ul {
 
 .HeaderTitle {
 	color: var(--fern);
+}
+
+.HomePost .Pictures img {
+  width: 100%; 
+  max-width: 200px; 
+	max-height: 200px;
+  height: auto; 
+	margin: 0px;
 }

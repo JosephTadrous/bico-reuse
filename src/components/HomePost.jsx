@@ -8,9 +8,16 @@ export default function HomePost({post}) {
 			<NavLink className="PostContainer"
 			 		to={'/post'} 
 					state={{pid: post._id}}>
+
+				<h2 className="PostInfo">{post.title}- ${post.price} </h2>
 				
-				<h1 className="PostInfo">{post.title} <br/>
-					<div className="PostPrice">${post.price}</div></h1>
+				<div className="Pictures">
+					{
+						post.photos.map((picture) => {
+							return <img key={Date.now()} src={picture} alt=":( unknown picture" />
+						})
+					}
+				</div>
 			</NavLink> 
 			
 			<NavLink 

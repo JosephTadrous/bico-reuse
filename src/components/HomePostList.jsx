@@ -5,7 +5,6 @@ import './Home.css';
 export default function HomePostList({posts}) {
 	return ( 
 	<div>
-		<h1 className="HeaderTitle">Current Posts</h1>
 		<ul className="PostLinks">
 			{
 				posts.map((post) => {
