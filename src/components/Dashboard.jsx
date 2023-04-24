@@ -25,6 +25,8 @@ function Last7Days () {
 
 export default function Dashboard() { 
     const [data, setData] = useState([]);
+    const [week, setWeek] = useState([]);
+    const [itemSold, setItemSold] = useState([])
     //const [isBusy, setBusy] = useState(true)
 
 	useEffect( () => {
@@ -35,15 +37,32 @@ export default function Dashboard() {
 		});
 	});
 
+    useEffect( () => {
+		fetch('http://localhost:3000/last_week')
+		.then((res) => res.json())
+		.then((week) => {
+			setWeek(week);
+		});
+	});
+
+    useEffect( () => {
+		fetch('http://localhost:3000/items_sold')
+		.then((res) => res.json())
+		.then((itemSold) => {
+			setItemSold(itemSold);
+		});
+	});
+
     //while (setBusy) { 
     //    console.log("waiting for data")
     // }
 	return <html className="EditForm"> 
     <div> Number of available posts: {data.post_count} </div>
     <div> Number of users: {data.user_count} </div>
+    <div> Number of items sold: {itemSold }</div>
     <Plot
         data={[
-          {type: 'scatter', x: Last7Days(), y: [2, 5, 3, 4, 5, 2, 9]},
+          {type: 'scatter', x: Last7Days(), y: week},
         ]}
         layout={ {width: 640, height: 480, title: 'Number of posts per day (last 7 days)'} }
       />
