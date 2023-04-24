@@ -352,7 +352,7 @@ app.use("/approve_post", (req, res) => {
 
 app.get("/post", (req, res) => {
 	let pid= req.query.pid;
-	console.log(pid);
+	console.log("AAAAA");
 	Post.findById(pid)
 	.populate('seller')
 	.then(
@@ -502,33 +502,36 @@ app.use("/create_user", (req, res) => {
 	reqCollege= req.body.college;
 	reqPass= req.body.password;
 
-	User.countDocuments({email: reqEmail}, (err, count) => {
+	User.countDocuments({email: reqEmail})
+	.then((count) => {
 			if (count > 0) {
 				res.status(400).send("email already exists");
+			} else {
+				let newUser= new User({
+					_id: new mongoose.Types.ObjectId(),
+					name: reqName,
+					email: reqEmail,
+					phone: reqPhone,
+					college: reqCollege,
+					pfp: null,
+					history: [],
+					bookmarked: [],
+				});
+			
+				newUser.setPassword(reqPass);
+			
+				const user_result= newUser.save();
+			
+				user_result.then((response) =>  { res.status(200).send("Success"); }, 
+				(error) => {
+					console.log(error);
+					res.status(500).send("Something went wrong"); 
+				});
 			}
 		}
 	);
 
-	let newUser= new User({
-		_id: new mongoose.Types.ObjectId(),
-		name: reqName,
-		email: reqEmail,
-		phone: reqPhone,
-		college: reqCollege,
-		pfp: null,
-		history: [],
-		bookmarked: [],
-	});
-
-	newUser.setPassword(reqPass);
-
-	const user_result= newUser.save();
-
-	user_result.then((response) =>  { res.status(200).send("Success"); }, 
-	(error) => {
-		console.log(error);
-		res.status(500).send("Something went wrong"); 
-	});
+	
 });
 
 // gets the number of posts 
