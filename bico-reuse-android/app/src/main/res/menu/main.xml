@@ -14,7 +14,14 @@
         android:id="@+id/profile"
         android:icon="@drawable/ic_action_name"
         android:orderInCategory="100"
-        android:title="profile"
+        app:showAsAction="ifRoom"
+        android:icon="@drawable/ic_action_name"/>
+
+    <item android:title="Log Out"
+        android:id="@+id/logOut"
+        android:orderInCategory="100"
+        app:showAsAction="ifRoom"/>
+        android:title="logOut"
         app:showAsAction="ifRoom" />
 
 </menu>

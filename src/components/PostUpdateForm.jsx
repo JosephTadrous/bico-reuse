@@ -44,7 +44,6 @@ export default function PostUpdateForm() {
 					</div>
 			</form>
     </div>
-
 	)
 }
 

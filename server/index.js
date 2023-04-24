@@ -303,12 +303,13 @@ app.use("/approve_post", (req, res) => {
 			} else {
 				// res.json({'status' : 'updated the post'});
 				// console.log("SUCCESS!");
+				console.log(oldPost.photos[0]);
 				res.redirect('http://localhost:5173/');
 			}
 		},
 		(error) => {
 			// if an error occurs 
-			// console.log("ERROR");
+			console.log(error);
 			res.status(500).send(error);
 		}
 	);

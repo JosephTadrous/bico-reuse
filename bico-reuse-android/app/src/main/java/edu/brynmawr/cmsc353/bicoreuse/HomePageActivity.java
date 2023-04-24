@@ -29,6 +29,7 @@ public class HomePageActivity extends AppCompatActivity {
     RecycleViewAdapter adapter;
     RecyclerView recyclerView;
     private String userId;
+    private String postId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +61,8 @@ public class HomePageActivity extends AppCompatActivity {
                 i.putExtra("id", userId);
                 i.putExtra("curUserId", userId);
                 startActivity(i);
+            case R.id.logOut:
+                this.finish();
                 break;
             case R.id.favorites:
                 Intent j = new Intent(this, BookmarksActivity.class);

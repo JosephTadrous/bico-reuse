@@ -1,14 +1,18 @@
 package edu.brynmawr.cmsc353.bicoreuse.info;
 
+import android.content.Context;
 import android.util.Log;
+import android.widget.Toast;
 
 
+import org.json.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
+import java.net.URI;
 import java.net.URL;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -24,6 +28,7 @@ public class PostInfo {
     private String date;
     private String status;
     private UserInfo seller;
+    private String imageURL;
     private boolean success;
 
     public PostInfo(String id) {
@@ -65,6 +70,22 @@ public class PostInfo {
                         JSONObject sellerObject= (JSONObject) jsonObject.get("seller");
                         this.seller= new UserInfo(sellerObject);
 
+                        Object imageArray = (Object) jsonObject.get("photos");
+                        String image = (String) imageArray.toString();
+                        image = image.substring(1, image.length() - 1);
+//                        Log.i("image URL", image);
+                        StringBuilder builder = new StringBuilder();
+
+
+                        for (char c : image.toCharArray()) {
+                            // 92 is the Ascii value of "\"
+                            if ((int) c != 92 && c != '"') {
+//                                Log.i("char", c + "");
+                                builder.append(c);
+                            }
+                        }
+
+                        this.imageURL = builder.toString();
                         success= true;
 
                     } else {
@@ -91,6 +112,8 @@ public class PostInfo {
         return success;
     }
 
+
+
     public String getTitle() {
         return title;
     }
@@ -115,4 +138,6 @@ public class PostInfo {
     public UserInfo getSeller() {
         return seller;
     }
+
+    public String getImage() { return imageURL; }
 }
