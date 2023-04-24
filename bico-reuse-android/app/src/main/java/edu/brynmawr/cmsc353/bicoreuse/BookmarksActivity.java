@@ -25,58 +25,25 @@ import java.util.concurrent.TimeUnit;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class HomePageActivity extends AppCompatActivity {
-    RecycleViewAdapter adapter;
+public class BookmarksActivity extends AppCompatActivity {
+    BookmarkViewAdapter adapter;
     RecyclerView recyclerView;
     private String userId;
+    private String type;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_homepage);
-
+        setContentView(R.layout.activity_bookmarks);
         Intent intent= getIntent();
 
-        userId= intent.getStringExtra("userId");
+        userId = intent.getStringExtra("userId");
+        type = intent.getStringExtra("type");
 
 
     }
 
-    // method to inflate the options menu when
-    // the user opens the menu for the first time
-    @Override
-    public boolean onCreateOptionsMenu( Menu menu ) {
 
-        getMenuInflater().inflate(R.menu.main, menu);
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected( @NonNull MenuItem item ) {
-
-        switch (item.getItemId()){
-            case R.id.profile:
-                Intent i = new Intent(this, ProfileActivity.class);
-                i.putExtra("id", userId);
-                i.putExtra("curUserId", userId);
-                startActivity(i);
-                break;
-            case R.id.favorites:
-                Intent j = new Intent(this, BookmarksActivity.class);
-                j.putExtra("userId", userId);
-                j.putExtra("type", "get_bookmarks");
-                startActivity(j);
-                break;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
-    public void onCreateButtonClick(View v) {
-        Intent i= new Intent(this, CreatePostActivity.class);
-        i.putExtra("userId", userId);
-
-        this.startActivity(i);
-    }
 
     public void onBackPressed() {
         super.onBackPressed();
@@ -85,7 +52,7 @@ public class HomePageActivity extends AppCompatActivity {
 
     protected String message;
 
-    public JSONArray connectToServer() {
+    public JSONArray getPosts() {
         TextView tv = findViewById(R.id.statusField);
         JSONArray data = new JSONArray();
         try {
@@ -96,7 +63,8 @@ public class HomePageActivity extends AppCompatActivity {
                             // and that it has a /test endpoint that returns a JSON object with
                             // a field called "message"
 
-                            URL url = new URL("http://10.0.2.2:3000/api");
+                            URL url = new URL("http://10.0.2.2:3000/" + type + "?id=" + userId);
+                            Log.i("aywaa", url.toString());
 
                             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                             conn.setRequestMethod("GET");
@@ -112,6 +80,7 @@ public class HomePageActivity extends AppCompatActivity {
                                 data.put(jo);
                                 System.out.println("");
                                 String title = jo.get("title").toString();
+                                Log.i("A7AA", title);
                                 message = jo.get("title").toString();
                             }
 
@@ -177,6 +146,7 @@ public class HomePageActivity extends AppCompatActivity {
         }
         catch (Exception e) {
             // uh oh
+            Log.e("aA", e.getMessage());
             e.printStackTrace();
         }
         return bookmarked;
@@ -185,12 +155,15 @@ public class HomePageActivity extends AppCompatActivity {
     @Override
     public void onResume(){
         super.onResume();
-        JSONArray dataArray = connectToServer();
+        JSONArray dataArray = getPosts();
+
         JSONArray userBookmarks = isBookmarked();
+
+
         recyclerView = (RecyclerView)findViewById(R.id.recyclerView);
-        adapter = new RecycleViewAdapter(dataArray, getApplication(), this.userId, userBookmarks);
+        adapter = new BookmarkViewAdapter(dataArray, getApplication(), this.userId, userBookmarks);
         recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(HomePageActivity.this));
+        recyclerView.setLayoutManager(new LinearLayoutManager(BookmarksActivity.this));
 
         ActionBar actionBar = getSupportActionBar();
     }

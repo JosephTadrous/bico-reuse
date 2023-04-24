@@ -126,8 +126,8 @@
         android:textColor="@color/primary"
         android:textSize="16sp" />
 
-    <TextView
-        android:id="@+id/tvPostsHistory"
+    <Button
+        android:id="@+id/btnPostsHistory"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
@@ -136,7 +136,8 @@
         android:layout_marginBottom="0dp"
         android:fontFamily="@font/poppins_semibold"
         android:text="Posts History"
-        android:textColor="#2D3047"
+        android:backgroundTint="@color/secondary"
+        android:onClick="onClickPostsHistory"
         android:textSize="20sp" />
 
     <Button

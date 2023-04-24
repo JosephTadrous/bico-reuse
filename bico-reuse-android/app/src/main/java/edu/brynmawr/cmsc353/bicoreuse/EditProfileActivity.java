@@ -32,7 +32,7 @@ public class EditProfileActivity extends AppCompatActivity {
     private TextView tvCollegeEdit;
     private EditText etCollegeInputEdit;
     private TextView tvEmailEdit;
-    private EditText etEmailInputEdit;
+    private TextView tvEmailInputEdit;
     private TextView tvPhoneEdit;
     private EditText etPhoneInputEdit;
     private Button btnSubmitEdit;
@@ -62,8 +62,8 @@ public class EditProfileActivity extends AppCompatActivity {
         etCollegeInputEdit = findViewById(R.id.etCollegeInputEdit);
         etCollegeInputEdit.setText(college);
         tvEmailEdit = findViewById(R.id.tvEmailEdit);
-        etEmailInputEdit = findViewById(R.id.etEmailInputEdit);
-        etEmailInputEdit.setText(email);
+        tvEmailInputEdit = findViewById(R.id.tvEmailInputEdit);
+        tvEmailInputEdit.setText(email);
         tvPhoneEdit = findViewById(R.id.tvPhoneEdit);
         etPhoneInputEdit = findViewById(R.id.etPhoneInputEdit);
         etPhoneInputEdit.setText(phone);
@@ -79,10 +79,6 @@ public class EditProfileActivity extends AppCompatActivity {
                 }
                 if (etCollegeInputEdit.getText().toString().isEmpty()) {
                     etCollegeInputEdit.setError("College is required");
-                    existsError= true;
-                }
-                if (etEmailInputEdit.getText().toString().isEmpty()) {
-                    etEmailInputEdit.setError("Email is required");
                     existsError= true;
                 }
                 if (etPhoneInputEdit.getText().toString().isEmpty()) {
@@ -119,7 +115,6 @@ public class EditProfileActivity extends AppCompatActivity {
                             Map<String, String> requestData = new HashMap<>();
                             requestData.put("name", etNameInputEdit.getText().toString());
                             requestData.put("college", etCollegeInputEdit.getText().toString());
-                            requestData.put("email", etEmailInputEdit.getText().toString());
                             requestData.put("phone", etPhoneInputEdit.getText().toString());
 
                             DataOutputStream out = new DataOutputStream(conn.getOutputStream());

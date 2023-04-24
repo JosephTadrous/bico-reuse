@@ -31,7 +31,7 @@ public class ProfileActivity extends AppCompatActivity {
     private TextView tvEmailInput;
     private TextView tvPhone;
     private TextView tvPhoneInput;
-    private TextView tvPostsHistory;
+    private Button btnPostsHistory;
     private Button btnEdit;
     protected String id;
     protected String curUserId;
@@ -52,7 +52,7 @@ public class ProfileActivity extends AppCompatActivity {
         tvEmailInput = findViewById(R.id.tvEmailInput);
         tvPhone = findViewById(R.id.tvPhone);
         tvPhoneInput = findViewById(R.id.tvPhoneInput);
-        tvPostsHistory = findViewById(R.id.tvPostsHistory);
+        btnPostsHistory = findViewById(R.id.btnPostsHistory);
         btnEdit = findViewById(R.id.btnEdit);
 
         Intent intent = getIntent();
@@ -141,6 +141,13 @@ public class ProfileActivity extends AppCompatActivity {
         i.putExtra("college", college);
         i.putExtra("email", email);
         i.putExtra("phone", phone);
+        this.startActivity(i);
+    }
+
+    public void onClickPostsHistory(View v) {
+        Intent i = new Intent(this, BookmarksActivity.class);
+        i.putExtra("userId", id);
+        i.putExtra("type", "get_history");
         this.startActivity(i);
     }
 }

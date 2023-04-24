@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import org.json.JSONArray;
 
-public class PostViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+public class BookmarkViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
     TextView sellerName;
     TextView title;
     // TextView description;
@@ -22,7 +22,7 @@ public class PostViewHolder extends RecyclerView.ViewHolder implements View.OnCl
 
 
 
-    PostViewHolder(View itemView, String userId, JSONArray userBookmarks) {
+    BookmarkViewHolder(View itemView, String userId, JSONArray userBookmarks) {
         super(itemView);
         sellerName = (TextView)itemView.findViewById(R.id.Name);
         // description = (TextView)itemView.findViewById(R.id.Desc);

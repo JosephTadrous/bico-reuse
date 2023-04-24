@@ -24,6 +24,7 @@ app.use("/profile", (req, res) => {
 		var filter = {'_id' : req.query.id};
 		let user = User.findOne(filter)
 		.populate('history')
+		.populate('bookmarked')
 		.then(
 			// success
 			(user) => {
@@ -41,6 +42,56 @@ app.use("/profile", (req, res) => {
 		});
 	}
 });
+
+app.use("/get_bookmarks", (req, res) => {
+
+// shows another user's profile
+	var filter = {'_id' : req.query.id};
+	let user = User.findOne(filter)
+	.populate('history')
+	.populate('bookmarked')
+	.then(
+		// success
+		(user) => {
+			// user found
+			if (user) {
+				res.json(user.bookmarked);
+			} else {
+				// user not found
+				res.send('user not found');
+			}
+		},
+		// failure
+		(error) => {
+			res.status(500).send('Something went wrong');
+	});
+
+});
+
+app.use("/get_history", (req, res) => {
+
+	// shows another user's profile
+		var filter = {'_id' : req.query.id};
+		let user = User.findOne(filter)
+		.populate('history')
+		.populate('bookmarked')
+		.then(
+			// success
+			(user) => {
+				// user found
+				if (user) {
+					res.json(user.history);
+				} else {
+					// user not found
+					res.send('user not found');
+				}
+			},
+			// failure
+			(error) => {
+				res.status(500).send('Something went wrong');
+		});
+	
+	});
 
 
 app.get("/api", (req, res) => {
@@ -123,6 +174,43 @@ app.use("/all", (req, res) => {
 			res.status(500).send('Something went wrong');
 	});
 });
+
+app.use("/add_bookmark", (req, res) => {
+	var filter = { '_id' : req.body.userId };
+	var action = { '$push': {'bookmarked' : req.body.postId} };
+	let updatedUser = User.findOneAndUpdate(filter, action)
+	.then(
+		(orig) => {
+			if (!orig) {
+				res.json({'status' : 'no user found'});
+			} else {
+				res.redirect("http://localhost:5173/");
+			}
+		},
+		(error) => {
+			res.status(500).send('Something went wrong');
+		}
+	);
+});
+
+app.use("/delete_bookmark", (req, res) => {
+	var filter = { '_id' : req.body.userId };
+	var action = { '$pull': {'bookmarked' : req.body.postId} };
+	let updatedUser = User.findOneAndUpdate(filter, action)
+	.then(
+		(orig) => {
+			if (!orig) {
+				res.json({'status' : 'no user found'});
+			} else {
+				res.redirect("http://localhost:5173/");
+			}
+		},
+		(error) => {
+			res.status(500).send('Something went wrong');
+		}
+	);
+});
+
 
 // endpoint for editing currently active posts such as updating the description and price 
 app.use("/edit_post", (req, res) => {

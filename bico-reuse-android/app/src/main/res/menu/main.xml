@@ -4,9 +4,17 @@
 
     <!-- action button for search -->
     <item
+        android:id="@+id/favorites"
+        android:icon="@drawable/favorites"
+        android:orderInCategory="100"
+        android:title="favorites"
+        app:showAsAction="ifRoom" />
+
+    <item
         android:id="@+id/profile"
         android:icon="@drawable/ic_action_name"
         android:orderInCategory="100"
         android:title="profile"
         app:showAsAction="ifRoom" />
+
 </menu>
