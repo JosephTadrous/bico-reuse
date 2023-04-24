@@ -22,7 +22,7 @@ export default function Header() {
 				</NavLink>
 				
 				<NavLink className="CreateButton" to={'/dashboard'}>
-					<h3>+ Dashboard</h3>
+					<h3>Dashboard</h3>
 				</NavLink>
 				
 				{/* <NavLink to={'/profile'}>

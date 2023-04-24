@@ -35,7 +35,7 @@ export default function PostUpdateForm() {
 					<div className="TitleInput"><div className="TextContainer">Title:</div> <input name="title" defaultValue={post.title}/></div>  
 					<div className="DescriptionInput"><div className="TextContainer">Description:</div> <input name="description" defaultValue={post.description}/></div> 
 					<div className="PriceInput"><div className="TextContainer">Price:</div> <input name="price" defaultValue={post.price}/></div> 
-					<div className="PhotoInput"><div className="TextContainer">Image:</div> <input name="photo" defaultValue={post.image}/></div> 
+					<div className="PhotoInput"><div className="TextContainer">Image:</div> <input name="photo" defaultValue={(post.photos.length > 0) ? post.photos[0] : ""}/></div> 
 					<div className="StatusInput"><div className="TextContainer">Status:</div> <input name="status" defaultValue={post.status}/></div>	
 
 					<div className="Buttons">

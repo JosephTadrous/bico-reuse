@@ -28,8 +28,8 @@ ul {
 	border-style: solid;
 	border-width: 2px;
 
-	width: 320px;
-	height: 320px;
+	width: 350px;
+	height: 350px;
 }
 
 
@@ -92,5 +92,6 @@ ul {
 	display: flex;
 	align-items: center;
 	justify-content: space-around;
-	gap: 32px;
+	width: 300px;
+	margin-top: 12px;
 }
