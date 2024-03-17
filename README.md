@@ -11,7 +11,7 @@ campuses and leftover items at the end of the school year. We have seen at the e
 
 ### Description
 
-Our system consists of 4 main functionalities:
+Our system consists of 3 main functionalities:
 * Creating user profiles: The users would be able to create profiles on the app, providing their personal information, including their name, profile picture, contact information, institution, and history of items sold/listed. Each user has their own personal profile page that they can add, delete, and edit their information.
 * Posting items: The users could post pictures and descriptions of items they no longer need. The post includes the title, item description, price, photo(s), location, condition, availability, contact information, and date posted. Regarding a post, sellers and buyers have different interfaces:
     * Sellers can edit the post, see how many people bookmarked/watched the post, delete the post once the item is sold, etc.
